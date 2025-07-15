@@ -2,14 +2,6 @@
 
 ---
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Linux-Arch%20%7C%20NixOS-blue?style=flat-square&logo=linux" alt="Linux"/>
-  <img src="https://img.shields.io/badge/Terminal-Vim%20%7C%20Tmux%20%7C%20Zsh-7e57c2?style=flat-square&logo=gnome-terminal"/>
-  <img src="https://img.shields.io/badge/Cloud-AWS%20%7C%20Kubernetes-orange?style=flat-square&logo=amazonaws"/>
-</p>
-
----
-
 ### 🌑 Private GitLab Contributions
 
 <p align="center">
@@ -17,9 +9,3 @@
 </p>
 
 > Exported with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
-
----
-
-<p align="center">
-  <em>“Live it. Build it. Automate it.”</em>
-</p>
