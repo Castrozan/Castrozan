@@ -15,7 +15,8 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/Castrozan/private-heatmap-generator/0e3130bb59b9c702b7df42f1b6042fe76313e9d9/gitlab-graph.svg" alt="GitLab Contribution Graph" />
 </p>
-> Generated with [Castrozanprivate-heatmap-generator](https://github.com/Castrozan/private-heatmap-generator)
+
+> Generated with [private-heatmap-generator](https://github.com/Castrozan/private-heatmap-generator)
 
 ---
 
