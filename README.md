@@ -9,3 +9,4 @@
 </p>
 
 > Exported with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
+
