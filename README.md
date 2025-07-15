@@ -11,28 +11,6 @@
 
 ---
 
-### 🧠 About Me
-
-```txt
-Who I am:        A software engineer writing clean code and clean architecture.
-Where I currently work:    Betha Sistemas · Software Architect
-What I love:     Distributed systems, DX and LLMs.
-Where I live:    Santa Catarina — 🇧🇷
-What I believe:  If it's automatable, it's inevitable.
-````
-
----
-
-### ⚙️ I build with
-
-* 🧱 Architectures: DDD · Clean · Hexagonal · Event-Driven
-* 🔁 Patterns: Microservices · CQRS · Messaging Queues
-* 🛠️ Tools: Docker · GitHub Actions · Grafana Loki · Redis · PostgreSQL · MongoDB · GitLab CI/CD · AWS · Terraform
-* 🧪 Languages: Java · Go · PHP · JavaScript · TypeScript · C# · HTMX
-* ⚙️ OS: NixOS · Ubuntu
-
----
-
 ### 🌑 Private GitLab Contributions
 
 > Automatically generated with [private-heatmap-generator](https://github.com/Castrozan/private-heatmap-generator)
@@ -40,14 +18,6 @@ What I believe:  If it's automatable, it's inevitable.
 <p align="center">
   <img src="https://raw.githubusercontent.com/Castrozan/private-heatmap-generator/0e3130bb59b9c702b7df42f1b6042fe76313e9d9/gitlab-graph.svg" alt="GitLab Contribution Graph" />
 </p>
-
----
-
-### 📚 Current Quests
-
-* Learning Japanese (📱 Duolingo + 📺 JP content)
-* Exploring AI agent tooling & prompt engineering
-* Writing a thesis on OPENAPI, MCP, and conversational agents for system integration
 
 ---
 
