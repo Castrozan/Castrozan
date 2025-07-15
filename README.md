@@ -16,7 +16,7 @@
   <img src="https://raw.githubusercontent.com/Castrozan/private-heatmap-generator/0e3130bb59b9c702b7df42f1b6042fe76313e9d9/gitlab-graph.svg" alt="GitLab Contribution Graph" />
 </p>
 
-> Generated with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
+> Exported with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
 
 ---
 
