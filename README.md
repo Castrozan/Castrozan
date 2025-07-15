@@ -1,4 +1,3 @@
-<h1 align="center">Lucas Zanoni</h1>
 <p align="center"><em>Software Engineer · Tech Explorer · Terminal Enthusiast</em></p>
 
 ---
