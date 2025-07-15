@@ -2,7 +2,7 @@
 
 ---
 
-### 🌑 Private GitLab Contributions
+#### 🌑 Private GitLab Contributions
 
 <p align="center">
   <img src="https://github.com/Castrozan/private-gitlab-heatmap-exporter/blob/master/gitlab-graph.svg" alt="GitLab Contribution Graph" />
