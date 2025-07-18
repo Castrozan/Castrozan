@@ -1,4 +1,6 @@
-<p align="center"><em>Software Engineer · Tech Explorer · Terminal Enthusiast</em></p>
+<p align="center">
+  <em><span style="font-family: monospace;">Software Engineer · Tech Explorer · Terminal Enthusiast</span></em>
+</p>
 
 ---
 
@@ -9,4 +11,3 @@
 </p>
 
 > Exported safely with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
-
