@@ -1,5 +1,5 @@
 <p align="center">
-  <em><span style="font-family: monospace;">Software Engineer · Tech Explorer · Terminal Enthusiast</span></em>
+  <em><span style="font-family: Liberation Mono;">Software Engineer · Tech Explorer · Terminal Enthusiast</span></em>
 </p>
 
 ---
