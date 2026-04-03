@@ -1,15 +1,14 @@
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-dark.gif#gh-dark-mode-only" alt="">
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-light.gif#gh-light-mode-only" alt="">
 
-### Hey!
-
-I'm **Lucas Zanoni**.
-
-Software engineer with a thing for terminals, NixOS, and automation.
-I run a declarative [dotfiles](https://github.com/Castrozan/.dotfiles) setup powered by Nix flakes, and I like contributing to tools I use daily.
-
 [![NixOS](https://img.shields.io/badge/NixOS-5277C3?style=flat&logo=nixos&logoColor=white)](https://nixos.org)
 [![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=hyprland&logoColor=black)](https://hyprland.org)
+[![Neovim](https://img.shields.io/badge/Neovim-57A143?style=flat&logo=neovim&logoColor=white)](https://neovim.io)
+[![Nix](https://img.shields.io/badge/Nix-7EBAE4?style=flat&logo=nixos&logoColor=white)](https://nixos.org)
+[![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)](https://go.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
+[![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)](https://rust-lang.org)
 
 <br clear="left">
 
@@ -34,20 +33,3 @@ I run a declarative [dotfiles](https://github.com/Castrozan/.dotfiles) setup pow
 </p>
 
 > Safely exported with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
-
----
-
-#### Stats
-
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api?username=Castrozan&show_icons=true&theme=transparent&hide_border=true&title_color=58a6ff&text_color=c9d1d9&icon_color=8b949e">
-    <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api?username=Castrozan&show_icons=true&theme=default&hide_border=true">
-    <img height="165" src="https://github-readme-stats.vercel.app/api?username=Castrozan&show_icons=true&theme=transparent&hide_border=true&title_color=58a6ff&text_color=c9d1d9&icon_color=8b949e" alt="GitHub Stats">
-  </picture>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=Castrozan&layout=compact&theme=transparent&hide_border=true&title_color=58a6ff&text_color=c9d1d9&langs_count=8">
-    <source media="(prefers-color-scheme: light)" srcset="https://github-readme-stats.vercel.app/api/top-langs/?username=Castrozan&layout=compact&theme=default&hide_border=true&langs_count=8">
-    <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Castrozan&layout=compact&theme=transparent&hide_border=true&title_color=58a6ff&text_color=c9d1d9&langs_count=8" alt="Top Languages">
-  </picture>
-</p>
