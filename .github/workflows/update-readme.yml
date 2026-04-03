@@ -22,32 +22,30 @@ jobs:
           langs: "6"
           ignore: "HTML,CSS,Dockerfile,Makefile"
 
-      # --- OSS contributions: merged PRs in external repos ---
-      - name: Fetch merged PRs in external repos
+      # --- OSS contributions: merged + open PRs in external repos (50+ stars) ---
+      - name: Fetch PRs in external repos
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh api graphql --paginate -f query='
-            query($endCursor: String) {
-              user(login: "Castrozan") {
-                pullRequests(first: 100, states: [MERGED, OPEN], after: $endCursor, orderBy: {field: CREATED_AT, direction: DESC}) {
+          (
+            gh api graphql --paginate -f query='
+              query($endCursor: String) {
+                search(query: "author:Castrozan is:pr is:merged -user:Castrozan", type: ISSUE, first: 100, after: $endCursor) {
                   pageInfo { hasNextPage endCursor }
-                  nodes {
-                    title
-                    number
-                    url
-                    repository {
-                      nameWithOwner
-                      url
-                      stargazerCount
-                      owner { login }
-                    }
-                  }
+                  nodes { ... on PullRequest { title number url repository { nameWithOwner url stargazerCount } } }
                 }
               }
-            }
-          ' --jq '.data.user.pullRequests.nodes[]' | jq -s '
-            [.[] | select(.repository.owner.login != "Castrozan") | select(.repository.stargazerCount >= 50)]
+            ' --jq '.data.search.nodes[]'
+            gh api graphql --paginate -f query='
+              query($endCursor: String) {
+                search(query: "author:Castrozan is:pr is:open -user:Castrozan", type: ISSUE, first: 100, after: $endCursor) {
+                  pageInfo { hasNextPage endCursor }
+                  nodes { ... on PullRequest { title number url repository { nameWithOwner url stargazerCount } } }
+                }
+              }
+            ' --jq '.data.search.nodes[]'
+          ) | jq -s '
+            [.[] | select(.repository.stargazerCount >= 50)]
             | group_by(.repository.nameWithOwner)
             | map({
                 repo: .[0].repository.nameWithOwner,

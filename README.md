@@ -22,6 +22,8 @@ TypeScript    ░░░░░░░░░░░░░░░░░░░░░░
 <!-- OSS_CONTRIBUTIONS:START -->
 | Project | PR | Description |
 |---------|-----|-------------|
+| [hyprwm/Hyprland](https://github.com/hyprwm/Hyprland) | [#13969](https://github.com/hyprwm/Hyprland/pull/13969) | input: fix focus_on_close=2 (MRU) routing to cursor path instead of getNextCandidate |
+| [viu-media/viu](https://github.com/viu-media/viu) | [#194](https://github.com/viu-media/viu/pull/194) | fix: move DownloadService to session Context to prevent worker registration crash |
 | [savedra1/clipse](https://github.com/savedra1/clipse) | [#331](https://github.com/savedra1/clipse/pull/331) | fix: sanitize filter targets to prevent fuzzy search panic on binary data |
 | [k3d3/claude-desktop-linux-flake](https://github.com/k3d3/claude-desktop-linux-flake) | [#17](https://github.com/k3d3/claude-desktop-linux-flake/pull/17) | Update to 0.8.1 |
 <!-- OSS_CONTRIBUTIONS:END -->
