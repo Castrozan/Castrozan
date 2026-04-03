@@ -1,5 +1,8 @@
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-dark.gif#gh-dark-mode-only" alt="">
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-light.gif#gh-light-mode-only" alt="">
+
+&nbsp;
+
 <!--START_SECTION:waka-->
 ```text
 Python        ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░   38.39 %
@@ -10,6 +13,7 @@ Lua           ░░░░░░░░░░░░░░░░░░░░░░
 TypeScript    ░░░░░░░░░░░░░░░░░░░░░░░░░   01.68 %
 ```
 <!--END_SECTION:waka-->
+
 [![NixOS](https://img.shields.io/badge/NixOS-5277C3?style=flat&logo=nixos&logoColor=white)](https://nixos.org) [![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=hyprland&logoColor=black)](https://hyprland.org) [![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)](https://go.dev) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org) [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org) [![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)](https://rust-lang.org)
 <br clear="both">
 
