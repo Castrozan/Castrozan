@@ -30,7 +30,7 @@ jobs:
           gh api graphql --paginate -f query='
             query($endCursor: String) {
               user(login: "Castrozan") {
-                pullRequests(first: 100, states: MERGED, after: $endCursor, orderBy: {field: CREATED_AT, direction: DESC}) {
+                pullRequests(first: 100, states: [MERGED, OPEN], after: $endCursor, orderBy: {field: CREATED_AT, direction: DESC}) {
                   pageInfo { hasNextPage endCursor }
                   nodes {
                     title
@@ -47,7 +47,7 @@ jobs:
               }
             }
           ' --jq '.data.user.pullRequests.nodes[]' | jq -s '
-            [.[] | select(.repository.owner.login != "Castrozan") | select(.repository.stargazerCount >= 10)]
+            [.[] | select(.repository.owner.login != "Castrozan") | select(.repository.stargazerCount >= 50)]
             | group_by(.repository.nameWithOwner)
             | map({
                 repo: .[0].repository.nameWithOwner,

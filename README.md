@@ -1,5 +1,6 @@
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-dark.gif#gh-dark-mode-only" alt="">
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-light.gif#gh-light-mode-only" alt="">
+<img align="right" width="280" src="https://pixel-profile-five.vercel.app/api/github-stats?username=Castrozan&screen_effect=true&theme=blue" alt="stats">
 
 <!--START_SECTION:waka-->
 ```text
@@ -11,21 +12,18 @@ Lua           ░░░░░░░░░░░░░░░░░░░░░░
 TypeScript    ░░░░░░░░░░░░░░░░░░░░░░░░░   01.68 %
 ```
 <!--END_SECTION:waka-->
-
 [![NixOS](https://img.shields.io/badge/NixOS-5277C3?style=flat&logo=nixos&logoColor=white)](https://nixos.org) [![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=hyprland&logoColor=black)](https://hyprland.org) [![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)](https://go.dev) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org) [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org) [![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)](https://rust-lang.org)
-
-<br clear="left">
+<br clear="both">
 
 ---
 
-#### Open Source Contributions
+#### Last Open Source Contributions
 
 <!-- OSS_CONTRIBUTIONS:START -->
 | Project | PR | Description |
 |---------|-----|-------------|
 | [savedra1/clipse](https://github.com/savedra1/clipse) | [#331](https://github.com/savedra1/clipse/pull/331) | fix: sanitize filter targets to prevent fuzzy search panic on binary data |
 | [k3d3/claude-desktop-linux-flake](https://github.com/k3d3/claude-desktop-linux-flake) | [#17](https://github.com/k3d3/claude-desktop-linux-flake/pull/17) | Update to 0.8.1 |
-| [ugioni/k6-performance-testing](https://github.com/ugioni/k6-performance-testing) | [#4](https://github.com/ugioni/k6-performance-testing/pull/4) | export web dashboard |
 <!-- OSS_CONTRIBUTIONS:END -->
 
 ---
@@ -33,7 +31,7 @@ TypeScript    ░░░░░░░░░░░░░░░░░░░░░░
 #### Private GitLab Contributions
 
 <p align="center">
-  <img src="https://github.com/Castrozan/private-gitlab-heatmap-exporter/blob/master/gitlab-graph.svg" alt="GitLab Contribution Graph" />
+  <img src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/gitlab-snake.svg" alt="GitLab Contribution Graph" />
 </p>
 
 > Safely exported with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
