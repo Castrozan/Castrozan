@@ -1,14 +1,11 @@
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-dark.gif#gh-dark-mode-only" alt="">
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-light.gif#gh-light-mode-only" alt="">
 
-[![NixOS](https://img.shields.io/badge/NixOS-5277C3?style=flat&logo=nixos&logoColor=white)](https://nixos.org)
-[![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=hyprland&logoColor=black)](https://hyprland.org)
-[![Neovim](https://img.shields.io/badge/Neovim-57A143?style=flat&logo=neovim&logoColor=white)](https://neovim.io)
-[![Nix](https://img.shields.io/badge/Nix-7EBAE4?style=flat&logo=nixos&logoColor=white)](https://nixos.org)
-[![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)](https://go.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org)
-[![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org)
-[![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)](https://rust-lang.org)
+**6.4k+** commits &nbsp; **109** PRs merged &nbsp; **110** repos &nbsp; **14** issues
+
+&nbsp;
+
+[![NixOS](https://img.shields.io/badge/NixOS-5277C3?style=flat&logo=nixos&logoColor=white)](https://nixos.org) [![Hyprland](https://img.shields.io/badge/Hyprland-58E1FF?style=flat&logo=hyprland&logoColor=black)](https://hyprland.org) [![Neovim](https://img.shields.io/badge/Neovim-57A143?style=flat&logo=neovim&logoColor=white)](https://neovim.io) [![Go](https://img.shields.io/badge/Go-00ADD8?style=flat&logo=go&logoColor=white)](https://go.dev) [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://typescriptlang.org) [![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)](https://python.org) [![Rust](https://img.shields.io/badge/Rust-000000?style=flat&logo=rust&logoColor=white)](https://rust-lang.org)
 
 <br clear="left">
 
