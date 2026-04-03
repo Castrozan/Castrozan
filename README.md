@@ -1,8 +1,6 @@
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-dark.gif#gh-dark-mode-only" alt="">
 <img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-spin-light.gif#gh-light-mode-only" alt="">
 
-&nbsp;
-
 <!--START_SECTION:waka-->
 ```text
 Python        ▓▓▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░   38.39 %
