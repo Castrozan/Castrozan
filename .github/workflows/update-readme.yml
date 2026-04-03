@@ -1,4 +1,4 @@
-name: Update OSS Contributions
+name: Update README
 
 on:
   schedule:
@@ -14,6 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # --- git-waka: language stats from commits ---
+      - uses: Castrozan/git-waka@main
+        with:
+          username: Castrozan
+          days: "30"
+          langs: "6"
+          ignore: "HTML,CSS,Dockerfile,Makefile"
+
+      # --- OSS contributions: merged PRs in external repos ---
       - name: Fetch merged PRs in external repos
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -49,7 +58,7 @@ jobs:
             | sort_by(-.stars)
           ' > /tmp/contributions.json
 
-      - name: Generate markdown table
+      - name: Generate contributions table
         run: |
           python3 - <<'SCRIPT'
           import json
@@ -84,12 +93,13 @@ jobs:
               f.write(f"{before}\n{table}\n{after}")
           SCRIPT
 
+      # --- Commit all changes ---
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git diff --quiet README.md || (
             git add README.md &&
-            git commit -m "docs: update OSS contributions" &&
+            git commit -m "docs: update profile stats" &&
             git push
           )
