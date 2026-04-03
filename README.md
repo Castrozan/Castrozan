@@ -1,5 +1,5 @@
-<img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-dark.gif#gh-dark-mode-only" alt="">
-<img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/nix-light.gif#gh-light-mode-only" alt="">
+<img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-dark.gif#gh-dark-mode-only" alt="">
+<img align="left" width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-light.gif#gh-light-mode-only" alt="">
 
 <!--START_SECTION:waka-->
 ```text
@@ -33,7 +33,7 @@ TypeScript    ░░░░░░░░░░░░░░░░░░░░░░
 #### Private GitLab Contributions
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Castrozan/Castrozan/profile-redesign/assets/gitlab-snk.svg" alt="GitLab Contribution Graph" />
+  <img src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/gitlab-snk.svg" alt="GitLab Contribution Graph" />
 </p>
 
 > Safely exported with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
