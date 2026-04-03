@@ -1,9 +1,3 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:30363d&height=120&section=header">
-  <source media="(prefers-color-scheme: light)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:f6f8fa,50:d0d7de,100:eaeef2&height=120&section=header">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:30363d&height=120&section=header" alt="">
-</picture>
-
 ### Hey!
 
 I'm **Lucas Zanoni**.
@@ -18,16 +12,12 @@ I run a declarative [dotfiles](https://github.com/Castrozan/.dotfiles) setup pow
 
 #### Open Source Contributions
 
-Merged PRs in projects I don't own:
-
-| Project | PR | What |
-|---------|-----|------|
+<!-- OSS_CONTRIBUTIONS:START -->
+| Project | PR | Description |
+|---------|-----|-------------|
 | [savedra1/clipse](https://github.com/savedra1/clipse) | [#331](https://github.com/savedra1/clipse/pull/331) | fix: sanitize filter targets to prevent fuzzy search panic on binary data |
 | [k3d3/claude-desktop-linux-flake](https://github.com/k3d3/claude-desktop-linux-flake) | [#17](https://github.com/k3d3/claude-desktop-linux-flake/pull/17) | Update to 0.8.1 |
 | [ugioni/k6-performance-testing](https://github.com/ugioni/k6-performance-testing) | [#4](https://github.com/ugioni/k6-performance-testing/pull/4) | export web dashboard |
-
-<!-- OSS_CONTRIBUTIONS:START -->
-<!-- auto-updated by GitHub Actions -->
 <!-- OSS_CONTRIBUTIONS:END -->
 
 ---
@@ -56,9 +46,3 @@ Merged PRs in projects I don't own:
     <img height="165" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Castrozan&layout=compact&theme=transparent&hide_border=true&title_color=58a6ff&text_color=c9d1d9&langs_count=8" alt="Top Languages">
   </picture>
 </p>
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:30363d&height=100&section=footer">
-  <source media="(prefers-color-scheme: light)" srcset="https://capsule-render.vercel.app/api?type=waving&color=0:f6f8fa,50:d0d7de,100:eaeef2&height=100&section=footer">
-  <img width="100%" src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:30363d&height=100&section=footer" alt="">
-</picture>

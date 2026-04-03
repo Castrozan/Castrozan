@@ -1,0 +1,95 @@
+name: Update OSS Contributions
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # every Monday 6am UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch merged PRs in external repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api graphql --paginate -f query='
+            query($endCursor: String) {
+              user(login: "Castrozan") {
+                pullRequests(first: 100, states: MERGED, after: $endCursor, orderBy: {field: CREATED_AT, direction: DESC}) {
+                  pageInfo { hasNextPage endCursor }
+                  nodes {
+                    title
+                    number
+                    url
+                    repository {
+                      nameWithOwner
+                      url
+                      stargazerCount
+                      owner { login }
+                    }
+                  }
+                }
+              }
+            }
+          ' --jq '.data.user.pullRequests.nodes[]' | jq -s '
+            [.[] | select(.repository.owner.login != "Castrozan") | select(.repository.stargazerCount >= 10)]
+            | group_by(.repository.nameWithOwner)
+            | map({
+                repo: .[0].repository.nameWithOwner,
+                repo_url: .[0].repository.url,
+                stars: .[0].repository.stargazerCount,
+                prs: [.[] | {number, title, url}]
+              })
+            | sort_by(-.stars)
+          ' > /tmp/contributions.json
+
+      - name: Generate markdown table
+        run: |
+          python3 - <<'SCRIPT'
+          import json
+
+          with open("/tmp/contributions.json") as f:
+              repos = json.load(f)
+
+          lines = []
+          lines.append("| Project | PR | Description |")
+          lines.append("|---------|-----|-------------|")
+
+          for repo in repos:
+              for i, pr in enumerate(repo["prs"]):
+                  project = f'[{repo["repo"]}]({repo["repo_url"]})' if i == 0 else ""
+                  lines.append(
+                      f'| {project} '
+                      f'| [#{pr["number"]}]({pr["url"]}) '
+                      f'| {pr["title"]} |'
+                  )
+
+          table = "\n".join(lines)
+
+          with open("README.md") as f:
+              readme = f.read()
+
+          start = "<!-- OSS_CONTRIBUTIONS:START -->"
+          end = "<!-- OSS_CONTRIBUTIONS:END -->"
+          before = readme[: readme.index(start) + len(start)]
+          after = readme[readme.index(end) :]
+
+          with open("README.md", "w") as f:
+              f.write(f"{before}\n{table}\n{after}")
+          SCRIPT
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git diff --quiet README.md || (
+            git add README.md &&
+            git commit -m "docs: update OSS contributions" &&
+            git push
+          )
