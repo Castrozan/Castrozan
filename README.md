@@ -33,7 +33,7 @@ Lua          ░░░░░░░░░░░░░░░░░░░░░░�
 #### Private GitLab Contributions
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/gitlab-snk.svg" alt="GitLab Contribution Graph" />
+  <img src="https://raw.githubusercontent.com/Castrozan/private-gitlab-heatmap-exporter/master/gitlab-snk.svg" alt="GitLab Contribution Graph" />
 </p>
 
 > Safely exported with [Castrozan/private-gitlab-heatmap-exporter](https://github.com/Castrozan/private-gitlab-heatmap-exporter)
