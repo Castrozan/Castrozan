@@ -84,43 +84,48 @@ def record_ambient_canvas(destination):
     print(f"{destination.name}: {destination.stat().st_size:,} bytes", flush=True)
 
 
-def write_system_graph(destination, theme):
-    foreground, background, border, accent = (
-        ("#24292f", "#f6f8fa", "#8c959f", "#0969da")
-        if theme == "light"
-        else ("#e6edf3", "#161b22", "#6e7681", "#58a6ff")
-    )
+def write_site_architecture(destination):
     connections = [
-        "M132 85H177V40H227",
-        "M132 85H177V130H227",
-        "M362 40H402V85H437",
-        "M362 130H402V85H437",
-        "M597 85H631V40H662",
-        "M597 85H631V130H662",
+        ("M210 35H324", "#FFD600"),
+        ("M522 35H636", "#FFD600"),
+        ("M112 58V83H423V112", "#FF6B35"),
+        ("M210 135H324", "#FFD600"),
+        ("M522 135H579V35H636", "#FFD600"),
+        ("M522 135H636", "#FF6B35"),
+        ("M735 112V58", "#FF6B35"),
     ]
     nodes = [
-        (2, 65, 130, "Nix flake"),
-        (227, 20, 135, "NixOS"),
-        (227, 110, 135, "nix-darwin"),
-        (437, 65, 160, "Home Manager"),
-        (662, 20, 182, "Desktop + tools"),
-        (662, 110, 182, "Agent harnesses"),
+        (12, 12, "GitHub Actions", "build + deploy", "#FFD600"),
+        (324, 12, "Artifact Registry", "container images", "#FFD600"),
+        (636, 12, "Cloud Run apps", "health-gated rollouts", "#FFD600"),
+        (12, 112, "lucaszanoni.com", "browser requests", "#FFD600"),
+        (324, 112, "Cloudflare Worker", "edge routing", "#FFD600"),
+        (636, 112, "Cloudflare Access", "private routes", "#FF6B35"),
     ]
     elements = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="846" height="170" viewBox="0 0 846 170" role="img" aria-label="A Nix flake builds NixOS and nix-darwin. Home Manager supplies desktop tools and agent harnesses on both." data-animation-duration="4000">',
+        '<svg xmlns="http://www.w3.org/2000/svg" width="846" height="174" viewBox="0 0 846 174" role="img" aria-label="GitHub Actions builds images for Artifact Registry and deploys Cloud Run apps. Terraform configures the edge. Browser requests pass through a Cloudflare Worker, with Access protecting private routes." data-animation-duration="4000">',
         "<style>@keyframes signal{to{stroke-dashoffset:-240}}.signal{stroke-dasharray:6 54;animation:signal 4s linear infinite}</style>",
-        f'<g fill="none" stroke="{border}" stroke-width="2">',
-        *(f'<path d="{connection}"/>' for connection in connections),
+        '<rect width="846" height="174" fill="#0A0A0A"/>',
+        '<g fill="none" stroke="#555555" stroke-width="1.5">',
+        *(f'<path d="{connection}"/>' for connection, _ in connections),
         "</g>",
-        f'<g fill="none" stroke="{accent}" stroke-width="3">',
-        *(f'<path class="signal" d="{connection}"/>' for connection in connections),
+        '<g fill="none" stroke-width="3">',
+        *(
+            f'<path class="signal" d="{connection}" stroke="{accent}"/>'
+            for connection, accent in connections
+        ),
+        "</g>",
+        '<g fill="#888888" font-family="monospace" font-size="11">',
+        '<text x="249" y="77">Terraform</text>',
+        '<text x="584" y="94">public</text>',
         "</g>",
     ]
-    for left, top, width, label in nodes:
+    for left, top, title, subtitle, accent in nodes:
         elements.extend(
             [
-                f'<rect x="{left}" y="{top}" width="{width}" height="40" rx="5" fill="{background}" stroke="{border}"/>',
-                f'<text x="{left + width / 2}" y="{top + 25}" text-anchor="middle" fill="{foreground}" font-family="monospace" font-size="15">{label}</text>',
+                f'<rect x="{left}" y="{top}" width="198" height="46" rx="3" fill="#111111" stroke="{accent}"/>',
+                f'<text x="{left + 99}" y="{top + 19}" text-anchor="middle" fill="#F5F5F0" font-family="monospace" font-size="14">{title}</text>',
+                f'<text x="{left + 99}" y="{top + 35}" text-anchor="middle" fill="#888888" font-family="monospace" font-size="11">{subtitle}</text>',
             ]
         )
     elements.append("</svg>")
@@ -130,8 +135,7 @@ def write_system_graph(destination, theme):
 def main():
     destination = Path(__file__).parent / "scene" / "assets"
     record_ambient_canvas(destination / "ambient-canvas.gif")
-    for theme in ["light", "dark"]:
-        write_system_graph(destination / f"system-map-{theme}.svg", theme)
+    write_site_architecture(destination / "site-architecture.svg")
 
 
 if __name__ == "__main__":

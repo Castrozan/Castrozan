@@ -1,8 +1,6 @@
 # Lucas Zanoni
 
-Platform engineer in Brazil. I build the systems I want to spend all day in.
-
-## Even the idle screen is code
+AI engineer from Brazil. I specialize in applying AI to build great software.
 
 [![Ambient Canvas: a tumbling ASCII invader beside a scrolling circuit plotter.](assets/ambient-canvas.gif)](https://github.com/Castrozan/.dotfiles/tree/main/machine-configuration/desktop/appearance/screensaver/ambient-canvas)
 
@@ -10,14 +8,13 @@ Two scenes from [Ambient Canvas](https://github.com/Castrozan/.dotfiles/tree/mai
 
 ## Pick a rabbit hole
 
-| #   | Project                                                     | What's inside                                           |
-| --- | ----------------------------------------------------------- | ------------------------------------------------------- |
-| 1   | [.dotfiles](https://github.com/Castrozan/.dotfiles)         | NixOS, macOS, desktop tools and a shared agent setup.   |
-| 2   | [clawde](https://github.com/Castrozan/clawde)               | Persistent Claude Code agents, heartbeats and channels. |
-| 3   | [whisper-input](https://github.com/Castrozan/whisper-input) | Local speech-to-text that types into the focused field. |
-| 4   | [tcc](https://github.com/Castrozan/tcc)                     | OpenAPI specs become MCP tools and a chat interface.    |
+| #   | Project                                                       | What's inside                                                                                          |
+| --- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| 1   | [.dotfiles](https://github.com/Castrozan/.dotfiles)           | One Nix configuration for my NixOS and macOS machines, from desktop and editor to the agent tools.     |
+| 2   | [clawde](https://github.com/Castrozan/clawde)                 | Persistent Claude Code agents with scheduled heartbeats, messaging channels and sessions I can resume. |
+| 3   | [wellput](https://github.com/Castrozan/wellput)               | Writing rules and hooks that help coding agents explain their work clearly while I juggle sessions.    |
+| 4   | [Castrozan/Castrozan](https://github.com/Castrozan/Castrozan) | How this README works: GitHub Markdown, synchronized GIFs, a recorded flip and scheduled refreshes.    |
 
-## One configuration, both operating systems
+## How [lucaszanoni.com](https://lucaszanoni.com) reaches the edge
 
-[![A Nix flake builds NixOS and nix-darwin. Home Manager supplies desktop tools and agent harnesses on both.](assets/system-map-light.svg#gh-light-mode-only)](assets/system-map-light.svg#gh-light-mode-only)
-[![A Nix flake builds NixOS and nix-darwin. Home Manager supplies desktop tools and agent harnesses on both.](assets/system-map-dark.svg#gh-dark-mode-only)](assets/system-map-dark.svg#gh-dark-mode-only)
+[![GitHub Actions builds images for Artifact Registry and deploys Cloud Run apps. Terraform configures the edge. Browser requests pass through a Cloudflare Worker, with Access protecting private routes.](assets/site-architecture.svg)](https://github.com/Castrozan/lucaszanoni-web#architecture)
