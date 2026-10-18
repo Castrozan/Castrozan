@@ -9,13 +9,36 @@ from record import profile_preview
 
 
 @unittest.skipUnless(
-    os.environ.get("PROFILE_BROWSER_ENDPOINT_FILE"), "Chrome endpoint required"
+    os.environ.get("PROFILE_BROWSER_TESTS"), "Isolated browser tests disabled"
 )
 class BrowserMediaTests(unittest.TestCase):
     def test_embedded_media_advances_at_a_fixed_card_pose_during_both_turns(self):
-        endpoint = Path(os.environ["PROFILE_BROWSER_ENDPOINT_FILE"])
-        with TemporaryDirectory() as directory:
-            with profile_preview(endpoint) as (chrome, width, height):
+        for theme in ["light", "dark"]:
+            with (
+                self.subTest(theme=theme),
+                TemporaryDirectory() as directory,
+                profile_preview(theme) as (chrome, width, height),
+            ):
+                expected = (
+                    "rgb(255, 255, 255)" if theme == "light" else "rgb(13, 17, 23)"
+                )
+                self.assertEqual(
+                    chrome.evaluate("getComputedStyle(document.body).backgroundColor"),
+                    expected,
+                )
+                self.assertEqual((width, height), (846, 819))
+                self.assertIn(
+                    f"nix-{theme}.gif",
+                    chrome.evaluate(
+                        "document.querySelector('article.markdown-body img[src^=\"data:image/png;base64,\"]').closest('a').href"
+                    ),
+                )
+                vector_background = chrome.evaluate(
+                    "[...document.querySelectorAll('article.markdown-body span')].find(el=>el.shadowRoot).shadowRoot.querySelector('rect').getAttribute('fill')"
+                )
+                self.assertEqual(
+                    vector_background, "#fff" if theme == "light" else "#0d1117"
+                )
                 crops = chrome.evaluate(
                     "(() => { const article = document.querySelector('article.markdown-body'); "
                     "const image = article.querySelector('img[src^=\"data:image/png;base64,\"]'); "
