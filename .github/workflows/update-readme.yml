@@ -32,7 +32,19 @@ jobs:
       - name: Verify refresh adapter
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
       - name: Verify recorded animation and native Markdown
-        run: PROFILE_BROWSER_TESTS=1 nix-shell preview --run 'python3 -m unittest discover -s preview -p "test_*.py" -v'
+        run: |
+          PROFILE_BROWSER_TESTS=1 nix-shell preview --run 'python3 -m unittest discover -s preview -p "test_*.py" -v' 2>&1 | tee "$RUNNER_TEMP/profile-verification.log"
+      - name: Report verification failure
+        if: failure()
+        run: |
+          python3 - <<'PYTHON'
+          import os
+          from pathlib import Path
+          log = Path(os.environ["RUNNER_TEMP"]) / "profile-verification.log"
+          if log.exists():
+              message = log.read_text()[-12000:].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+              print(f"::error title=Profile verification failed::{message}")
+          PYTHON
 
   update:
     if: github.event_name != 'push'
@@ -108,7 +120,19 @@ jobs:
           nix-shell preview --run 'python3 preview/record.py --theme light'
           nix-shell preview --run 'python3 preview/record.py --theme dark'
       - name: Verify recorded animation and native Markdown
-        run: PROFILE_BROWSER_TESTS=1 nix-shell preview --run 'python3 -m unittest discover -s preview -p "test_*.py" -v'
+        run: |
+          PROFILE_BROWSER_TESTS=1 nix-shell preview --run 'python3 -m unittest discover -s preview -p "test_*.py" -v' 2>&1 | tee "$RUNNER_TEMP/profile-verification.log"
+      - name: Report verification failure
+        if: failure()
+        run: |
+          python3 - <<'PYTHON'
+          import os
+          from pathlib import Path
+          log = Path(os.environ["RUNNER_TEMP"]) / "profile-verification.log"
+          if log.exists():
+              message = log.read_text()[-12000:].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+              print(f"::error title=Profile verification failed::{message}")
+          PYTHON
       - name: Publish refreshed GIFs
         run: |
           if ! git diff --quiet -- preview/readme-flip-light.gif preview/readme-flip-dark.gif; then
