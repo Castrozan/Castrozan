@@ -32,8 +32,8 @@ def encode_recording(frames, output):
             *input_command,
             "-filter_complex",
             "fps=50,split[frames][palette_input];"
-            "[palette_input]palettegen=stats_mode=diff,setpts=0[palette];"
-            "[frames][palette]paletteuse=dither=bayer:bayer_scale=5:diff_mode=rectangle",
+            "[palette_input]palettegen=max_colors=64:stats_mode=diff,setpts=0[palette];"
+            "[frames][palette]paletteuse=dither=none:diff_mode=rectangle",
             "-t",
             "20",
             "-loop",
@@ -42,5 +42,17 @@ def encode_recording(frames, output):
         ],
         check=True,
     )
-    if output.stat().st_size > 16 * 1024 * 1024:
-        raise RuntimeError("The GIF exceeds the 16 MiB preview budget")
+    optimized = manifest.with_name("optimized.gif")
+    subprocess.run(
+        [
+            "gifsicle",
+            "--optimize=3",
+            str(output),
+            "--output",
+            str(optimized),
+        ],
+        check=True,
+    )
+    if optimized.stat().st_size > 10_000_000:
+        raise RuntimeError("The GIF exceeds the 10 MB inline image budget")
+    optimized.replace(output)

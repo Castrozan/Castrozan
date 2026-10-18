@@ -9,5 +9,6 @@ pkgs.mkShell {
       packages.websockets
     ]))
     pkgs.ffmpeg
+    pkgs.gifsicle
   ];
 }

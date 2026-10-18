@@ -22,10 +22,12 @@ class AnimationTests(unittest.TestCase):
                 self.assertNotIn("transparency", frame.info)
 
     def test_both_turns_animate_at_fifty_frames_per_second(self):
+        path = Path(__file__).with_name("readme-flip.gif")
+        self.assertLessEqual(path.stat().st_size, 10_000_000)
         intervals = [(9500, 10500), (18700, 19700)]
         samples = {interval: [] for interval in intervals}
         elapsed = 0
-        with Image.open(Path(__file__).with_name("readme-flip.gif")) as animation:
+        with Image.open(path) as animation:
             for frame_number in range(animation.n_frames):
                 animation.seek(frame_number)
                 duration = animation.info["duration"]
