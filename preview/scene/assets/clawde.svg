@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" color="#eaf3ff"
+      viewBox="0 0 350 124"
+      role="img"
+      aria-label="Persistent agent workspaces"
+    ><rect width="350" height="124" fill="#422f37" rx="6"/>
+      <g fill="none" stroke="#f19b86" stroke-width="1.5">
+        <rect x="20" y="17" width="144" height="89" rx="5" />
+        <rect x="186" y="17" width="144" height="89" rx="5" />
+        <path d="M20 37h144m22 0h144" />
+      </g>
+      <g fill="#f19b86">
+        <circle cx="32" cy="27" r="2" />
+        <circle cx="41" cy="27" r="2" />
+        <circle cx="198" cy="27" r="2" />
+        <circle cx="207" cy="27" r="2" />
+      </g>
+      <g
+        fill="#fce2db"
+        font-family="JetBrainsMono Nerd Font,monospace"
+        font-size="12"
+      >
+        <text x="34" y="60">agent: build</text>
+        <text x="34" y="80">working...</text>
+        <text x="200" y="60">agent: review</text>
+        <text x="200" y="80">listening...</text>
+      </g>
+      <path
+        d="M164 71h22m-15-5 7 5-7 5"
+        fill="none"
+        stroke="#f19b86"
+        stroke-width="2"
+      />
+    </svg>

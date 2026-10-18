@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" color="#eaf3ff"
+      viewBox="0 0 350 124"
+      role="img"
+      aria-label="Voice waveform becoming local text"
+    ><rect width="350" height="124" fill="#203e5b" rx="6"/>
+      <g stroke="#7ebae4" stroke-width="4" stroke-linecap="round">
+        <path
+          d="M25 56v12m12-25v38m12-57v76m12-66v56m12-42v28m12-23v18m12-38v58m12-47v36m12-26v16"
+        />
+      </g>
+      <path
+        d="M151 62h37m-7-6 7 6-7 6"
+        fill="none"
+        stroke="#7ebae4"
+        stroke-width="2"
+      />
+      <g stroke="#b8d1ee" stroke-width="5" stroke-linecap="round">
+        <path d="M216 45h100m-100 17h77m-77 17h92" />
+      </g>
+    </svg>
