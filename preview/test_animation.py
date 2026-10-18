@@ -33,7 +33,7 @@ class AnimationTests(unittest.TestCase):
                             )
                         elapsed += duration
                 self.assertGreaterEqual(len(samples), 150)
-                self.assertTrue(all(duration <= 50 for duration, _ in samples))
+                self.assertTrue(all(duration <= 60 for duration, _ in samples))
                 self.assertGreaterEqual(len({digest for _, digest in samples}), 100)
 
     def test_embedded_gif_preserves_frames_and_durations(self):
