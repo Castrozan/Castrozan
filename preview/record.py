@@ -88,18 +88,18 @@ def profile_preview(theme):
                 chrome, theme_script, theme, source_revision, "back"
             )
             load_markdown(chrome, theme_script, theme, source_revision, "front")
-            sources = chrome.evaluate(
-                "[...document.querySelectorAll('article.markdown-body img')]"
-                ".filter(image => image.getBoundingClientRect().width && "
-                "/\\.(gif|svg)$/.test(new URL(image.currentSrc).pathname))"
-                ".map(image => image.currentSrc)"
-            )
-            assets = read_media(sources)
             dimensions = chrome.evaluate(
                 f"{card_script}\nmountProfileReadmeCard("
                 f"{json.dumps(reverse_face)}, {json.dumps(TIMING)})"
             )
             width, height = dimensions["width"], dimensions["height"]
+            sources = chrome.evaluate(
+                "[...document.querySelectorAll('[data-readme-face] article.markdown-body img')]"
+                ".filter(image => image.getBoundingClientRect().width && "
+                "/\\.(gif|svg)$/.test(new URL(image.currentSrc).pathname))"
+                ".map(image => image.currentSrc)"
+            )
+            assets = read_media(sources)
             chrome.evaluate(
                 f"{media_script}\nmountProfileReadmeMedia({json.dumps(assets)})"
             )

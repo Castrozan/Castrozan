@@ -6,7 +6,7 @@ def frame_timestamps():
     return [
         *range(0, TIMING["outgoingStart"], 50),
         *range(TIMING["outgoingStart"], outgoing_end, 20),
-        outgoing_end,
+        *range(outgoing_end, TIMING["returnStart"], 50),
         *range(TIMING["returnStart"], TIMING["duration"], 20),
     ]
 

@@ -1,18 +1,23 @@
 # Lucas Zanoni
 
-Platform engineer in Brazil. I make systems reproducible and tools my own.
+Platform engineer in Brazil. I build the systems I want to spend all day in.
 
-## [.dotfiles](https://github.com/Castrozan/.dotfiles)
+## Even the idle screen is code
 
-One configuration for NixOS and macOS.
+[![Ambient Canvas: a tumbling ASCII invader beside a scrolling circuit plotter.](assets/ambient-canvas.gif)](https://github.com/Castrozan/.dotfiles/tree/main/machine-configuration/desktop/appearance/screensaver/ambient-canvas)
 
-![A Nix flake connecting machines and a terminal](assets/dotfiles.svg)
+Two scenes from [Ambient Canvas](https://github.com/Castrozan/.dotfiles/tree/main/machine-configuration/desktop/appearance/screensaver/ambient-canvas), my procedural screensaver. Recorded from the actual renderers.
 
-| [clawde](https://github.com/Castrozan/clawde)     | [whisper-input](https://github.com/Castrozan/whisper-input) |
-| ------------------------------------------------- | ----------------------------------------------------------- |
-| ![Persistent agent workspaces](assets/clawde.svg) | ![Voice becoming local text](assets/whisper-input.svg)      |
-| Persistent agents and declarative workspaces.     | Speak, transcribe and keep it local.                        |
+## Pick a rabbit hole
 
-## Also exploring
+| #   | Project                                                     | What's inside                                           |
+| --- | ----------------------------------------------------------- | ------------------------------------------------------- |
+| 1   | [.dotfiles](https://github.com/Castrozan/.dotfiles)         | NixOS, macOS, desktop tools and a shared agent setup.   |
+| 2   | [clawde](https://github.com/Castrozan/clawde)               | Persistent Claude Code agents, heartbeats and channels. |
+| 3   | [whisper-input](https://github.com/Castrozan/whisper-input) | Local speech-to-text that types into the focused field. |
+| 4   | [tcc](https://github.com/Castrozan/tcc)                     | OpenAPI specs become MCP tools and a chat interface.    |
 
-[From OpenAPI to conversational interfaces](https://github.com/Castrozan/tcc), my final-year project.
+## One configuration, both operating systems
+
+[![A Nix flake builds NixOS and nix-darwin. Home Manager supplies desktop tools and agent harnesses on both.](assets/system-map-light.svg#gh-light-mode-only)](assets/system-map-light.svg#gh-light-mode-only)
+[![A Nix flake builds NixOS and nix-darwin. Home Manager supplies desktop tools and agent harnesses on both.](assets/system-map-dark.svg#gh-dark-mode-only)](assets/system-map-dark.svg#gh-dark-mode-only)
