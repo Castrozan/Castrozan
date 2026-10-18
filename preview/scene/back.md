@@ -1,6 +1,6 @@
 # Lucas Zanoni
 
-AI engineer from Brazil. I specialize in applying AI to build great software.
+AI engineer from Brazil. I specialize in applying AI to build great software, turning ideas into production systems.
 
 [![Ambient Canvas: a tumbling ASCII invader beside a scrolling circuit plotter.](assets/ambient-canvas.gif)](https://github.com/Castrozan/.dotfiles/tree/main/machine-configuration/desktop/appearance/screensaver/ambient-canvas)
 
