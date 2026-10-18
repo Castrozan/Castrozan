@@ -33,6 +33,7 @@ jobs:
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
       - name: Verify recorded animation and native Markdown
         run: |
+          set -o pipefail
           PROFILE_BROWSER_TESTS=1 nix-shell preview --run 'python3 -m unittest discover -s preview -p "test_*.py" -v' 2>&1 | tee "$RUNNER_TEMP/profile-verification.log"
       - name: Report verification failure
         if: failure()
@@ -121,6 +122,7 @@ jobs:
           nix-shell preview --run 'python3 preview/record.py --theme dark'
       - name: Verify recorded animation and native Markdown
         run: |
+          set -o pipefail
           PROFILE_BROWSER_TESTS=1 nix-shell preview --run 'python3 -m unittest discover -s preview -p "test_*.py" -v' 2>&1 | tee "$RUNNER_TEMP/profile-verification.log"
       - name: Report verification failure
         if: failure()
