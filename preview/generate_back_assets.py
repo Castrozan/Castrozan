@@ -103,9 +103,9 @@ def write_site_architecture(destination):
         (636, 112, "Cloudflare Worker", "edge routing", "#FFD600"),
     ]
     elements = [
-        '<svg xmlns="http://www.w3.org/2000/svg" width="846" height="174" viewBox="0 0 846 174" role="img" aria-label="GitHub Actions builds images for Artifact Registry and deploys Cloud Run apps. Terraform configures the edge. Browser requests pass through a Cloudflare Worker, with Access protecting private routes." data-animation-duration="4000">',
+        '<svg xmlns="http://www.w3.org/2000/svg" width="846" height="171" viewBox="0 0 846 171" role="img" aria-label="GitHub Actions builds images for Artifact Registry and deploys Cloud Run apps. Terraform configures the edge. Browser requests pass through a Cloudflare Worker, with Access protecting private routes." data-animation-duration="4000">',
         "<style>@keyframes signal{to{stroke-dashoffset:-240}}.signal{stroke-dasharray:6 54;animation:signal 4s linear infinite}</style>",
-        '<rect width="846" height="174" fill="#0A0A0A"/>',
+        '<rect width="846" height="171" fill="#0A0A0A"/>',
         '<g fill="none" stroke="#555555" stroke-width="1.5">',
         *(f'<path d="{connection}"/>' for connection, _ in connections),
         "</g>",
