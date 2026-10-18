@@ -43,8 +43,10 @@ jobs:
           from pathlib import Path
           log = Path(os.environ["RUNNER_TEMP"]) / "profile-verification.log"
           if log.exists():
-              message = log.read_text()[-12000:].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-              print(f"::error title=Profile verification failed::{message}")
+              text = log.read_text()[-12000:]
+              for start in range(0, len(text), 2000):
+                  message = text[start:start + 2000].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+                  print(f"::error title=Profile verification failed::{message}")
           PYTHON
 
   update:
@@ -132,8 +134,10 @@ jobs:
           from pathlib import Path
           log = Path(os.environ["RUNNER_TEMP"]) / "profile-verification.log"
           if log.exists():
-              message = log.read_text()[-12000:].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-              print(f"::error title=Profile verification failed::{message}")
+              text = log.read_text()[-12000:]
+              for start in range(0, len(text), 2000):
+                  message = text[start:start + 2000].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+                  print(f"::error title=Profile verification failed::{message}")
           PYTHON
       - name: Publish refreshed GIFs
         run: |
