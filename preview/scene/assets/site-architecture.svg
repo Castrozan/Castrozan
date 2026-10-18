@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="846" height="171" viewBox="0 0 846 171" role="img" aria-label="GitHub Actions builds images for Artifact Registry and deploys Cloud Run apps. Terraform configures the edge. Browser requests pass through a Cloudflare Worker, with Access protecting private routes." data-animation-duration="4000">
+<style>@keyframes signal{to{stroke-dashoffset:-240}}.signal{stroke-dasharray:6 54;animation:signal 4s linear infinite}</style>
+<defs>
+<marker id="arrow-yellow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#FFD600"/></marker>
+<marker id="arrow-orange" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#FF6B35"/></marker>
+</defs>
+<rect width="846" height="171" fill="#0A0A0A"/>
+<g fill="none" stroke="#73736D" stroke-width="1.5">
+<path d="M229 28H306" marker-end="url(#arrow-yellow)"/>
+<path d="M537 28H614" marker-end="url(#arrow-yellow)"/>
+<path d="M191 116V84H579V143H614" marker-end="url(#arrow-yellow)"/>
+<path d="M229 143H306" marker-end="url(#arrow-orange)"/>
+<path d="M537 143H614" marker-end="url(#arrow-orange)"/>
+<path d="M731 116V58" marker-end="url(#arrow-yellow)"/>
+</g>
+<g fill="none" stroke-width="3">
+<path class="signal" d="M229 28H306" stroke="#FFD600"/>
+<path class="signal" d="M537 28H614" stroke="#FFD600"/>
+<path class="signal" d="M191 116V84H579V143H614" stroke="#FFD600"/>
+<path class="signal" d="M229 143H306" stroke="#FF6B35"/>
+<path class="signal" d="M537 143H614" stroke="#FF6B35"/>
+<path class="signal" d="M731 116V58" stroke="#FFD600"/>
+</g>
+<g fill="#D6D6D0" font-family="Arial,sans-serif" font-size="14">
+<text x="385" y="77">public routes</text>
+</g>
+<rect x="1" y="1" width="228" height="54" rx="3" fill="#111111" stroke="#FFD600"/>
+<text x="115" y="24" text-anchor="middle" fill="#F5F5F0" font-family="Arial,sans-serif" font-size="18" font-weight="600">GitHub Actions</text>
+<text x="115" y="44" text-anchor="middle" fill="#C8C8C0" font-family="Arial,sans-serif" font-size="13">build + Terraform</text>
+<rect x="309" y="1" width="228" height="54" rx="3" fill="#111111" stroke="#FFD600"/>
+<text x="423" y="24" text-anchor="middle" fill="#F5F5F0" font-family="Arial,sans-serif" font-size="18" font-weight="600">Artifact Registry</text>
+<text x="423" y="44" text-anchor="middle" fill="#C8C8C0" font-family="Arial,sans-serif" font-size="13">container images</text>
+<rect x="617" y="1" width="228" height="54" rx="3" fill="#111111" stroke="#FFD600"/>
+<text x="731" y="24" text-anchor="middle" fill="#F5F5F0" font-family="Arial,sans-serif" font-size="18" font-weight="600">Cloud Run apps</text>
+<text x="731" y="44" text-anchor="middle" fill="#C8C8C0" font-family="Arial,sans-serif" font-size="13">health-gated rollouts</text>
+<rect x="1" y="116" width="228" height="54" rx="3" fill="#111111" stroke="#FFD600"/>
+<text x="115" y="139" text-anchor="middle" fill="#F5F5F0" font-family="Arial,sans-serif" font-size="18" font-weight="600">lucaszanoni.com</text>
+<text x="115" y="159" text-anchor="middle" fill="#C8C8C0" font-family="Arial,sans-serif" font-size="13">incoming requests</text>
+<rect x="309" y="116" width="228" height="54" rx="3" fill="#111111" stroke="#FF6B35"/>
+<text x="423" y="139" text-anchor="middle" fill="#F5F5F0" font-family="Arial,sans-serif" font-size="18" font-weight="600">Cloudflare Access</text>
+<text x="423" y="159" text-anchor="middle" fill="#C8C8C0" font-family="Arial,sans-serif" font-size="13">private routes only</text>
+<rect x="617" y="116" width="228" height="54" rx="3" fill="#111111" stroke="#FFD600"/>
+<text x="731" y="139" text-anchor="middle" fill="#F5F5F0" font-family="Arial,sans-serif" font-size="18" font-weight="600">Cloudflare Worker</text>
+<text x="731" y="159" text-anchor="middle" fill="#C8C8C0" font-family="Arial,sans-serif" font-size="13">route to Cloud Run</text>
+</svg>

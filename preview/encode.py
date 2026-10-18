@@ -25,7 +25,7 @@ def encode_recording(frames, output):
         "ffmpeg",
         "-y",
         "-v",
-        "warning",
+        "error",
         "-f",
         "concat",
         "-safe",
@@ -38,8 +38,8 @@ def encode_recording(frames, output):
             *input_command,
             "-filter_complex",
             "fps=50,split[frames][palette_input];"
-            "[palette_input]palettegen=max_colors=64:stats_mode=diff,setpts=0[palette];"
-            "[frames][palette]paletteuse=dither=none:diff_mode=rectangle",
+            "[palette_input]palettegen=max_colors=256:stats_mode=single[palette];"
+            "[frames][palette]paletteuse=new=1:dither=none",
             "-t",
             str(TIMING["duration"] / 1000),
             "-loop",

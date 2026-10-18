@@ -1,6 +1,9 @@
 async function mountProfileReadmeMedia(assets) {
-  const article = document.querySelector("article.markdown-body");
-  const images = [...article.querySelectorAll("img")];
+  const images = [
+    ...document.querySelectorAll(
+      "[data-readme-face] article.markdown-body img",
+    ),
+  ];
   const animatedImages = [];
   const animatedVectors = [];
   const vectorTimelines = [];

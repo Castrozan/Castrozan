@@ -1,3 +1,5 @@
+import base64
+import io
 import json
 import os
 from pathlib import Path
@@ -8,6 +10,7 @@ from markdown_it import MarkdownIt
 from PIL import Image
 
 from browser import isolated_browser
+from media import decode_gif
 from record import profile_preview
 
 
@@ -15,6 +18,42 @@ from record import profile_preview
     os.environ.get("PROFILE_BROWSER_TESTS"), "Isolated browser tests disabled"
 )
 class BrowserMediaTests(unittest.TestCase):
+    def test_reverse_face_gif_uses_the_shared_seekable_clock(self):
+        frames = [Image.new("RGB", (2, 2), color) for color in ["red", "blue"]]
+        buffer = io.BytesIO()
+        frames[0].save(
+            buffer,
+            format="GIF",
+            save_all=True,
+            append_images=frames[1:],
+            duration=100,
+            loop=0,
+        )
+        source = "data:image/gif;base64," + base64.b64encode(buffer.getvalue()).decode()
+        asset = {"source": source, **decode_gif(buffer.getvalue())}
+        fixture = (
+            '<div data-readme-face="front"><article class="markdown-body">'
+            "Front face</article></div>"
+            '<div data-readme-face="back"><article class="markdown-body">'
+            f'<img src="{source}"></article></div>'
+        )
+        script = (Path(__file__).parent / "scene" / "media.js").read_text()
+        with isolated_browser("dark") as chrome:
+            chrome.evaluate(f"document.body.innerHTML = {json.dumps(fixture)}")
+            chrome.evaluate("document.querySelector('img').decode()")
+            chrome.evaluate(f"{script}\nmountProfileReadmeMedia({json.dumps([asset])})")
+            for milliseconds, frame_number in [(0, 0), (100, 1), (200, 0)]:
+                with self.subTest(milliseconds=milliseconds):
+                    chrome.evaluate(f"window.profileReadmeMedia.seek({milliseconds})")
+                    self.assertEqual(
+                        chrome.evaluate("document.querySelector('img').src"),
+                        asset["frames"][frame_number]["source"],
+                    )
+            chrome.evaluate("window.profileReadmeMedia.restore()")
+            self.assertEqual(
+                chrome.evaluate("document.querySelector('img').src"), source
+            )
+
     def test_embedded_media_advances_at_a_fixed_card_pose_during_both_turns(self):
         for theme in ["light", "dark"]:
             with (
@@ -93,6 +132,26 @@ class BrowserMediaTests(unittest.TestCase):
                 self.assertEqual(
                     capture(0)["snake"], capture(int(snake_duration))["snake"]
                 )
+                chrome.evaluate(
+                    "window.profileReadmeCard.animation.currentTime = 16000"
+                )
+                crops = chrome.evaluate(
+                    "(() => {const article=document.querySelector('[data-readme-face=back] article');"
+                    "const image=article.querySelector('img[src^=\"data:image/png;base64,\"]');"
+                    "const vector=[...article.querySelectorAll('span')]"
+                    ".find(element=>element.shadowRoot).shadowRoot.querySelector('svg');"
+                    "return Object.fromEntries(Object.entries({ambient:image,map:vector})"
+                    ".map(([name,element])=>{const bounds=element.getBoundingClientRect();"
+                    "return [name,[bounds.left,bounds.top,bounds.right,bounds.bottom]];}));})()"
+                )
+                for start, end in [(13000, 13500), (18000, 18500), (22200, 22700)]:
+                    before = capture(start)
+                    after = capture(end)
+                    for name in crops:
+                        with self.subTest(reverse=start, media=name):
+                            self.assertNotEqual(before[name], after[name])
+                    self.assertEqual(before, capture(start))
+                self.assertEqual(capture(0)["ambient"], capture(8000)["ambient"])
 
     def test_github_theme_selects_image_when_system_theme_disagrees(self):
         root = Path(__file__).resolve().parent

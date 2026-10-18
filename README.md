@@ -1,2 +1,4 @@
-[![Lucas Zanoni's profile README. Language stats and refreshed contributions flip over to a portfolio of systems, agents and local voice tools.](preview/readme-flip-light.gif#gh-light-mode-only)](preview/readme-flip-light.gif#gh-light-mode-only)
-[![Lucas Zanoni's profile README. Language stats and refreshed contributions flip over to a portfolio of systems, agents and local voice tools.](preview/readme-flip-dark.gif#gh-dark-mode-only)](preview/readme-flip-dark.gif#gh-dark-mode-only)
+[![Lucas Zanoni's profile README. Language stats and contributions flip to Ambient Canvas, projects and the edge architecture of lucaszanoni.com.](preview/readme-flip-light.gif#gh-light-mode-only)](preview/readme-flip-light.gif#gh-light-mode-only)
+[![Lucas Zanoni's profile README. Language stats and contributions flip to Ambient Canvas, projects and the edge architecture of lucaszanoni.com.](preview/readme-flip-dark.gif#gh-dark-mode-only)](preview/readme-flip-dark.gif#gh-dark-mode-only)
+
+[Projects and experiments](preview/scene/back.md)
