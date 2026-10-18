@@ -1,0 +1,123 @@
+.profile-reverse {
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 20px 8px 4px;
+}
+.profile-reverse .portfolio-heading h1 {
+  font-family: "IosevkaTermSlab Nerd Font", monospace;
+  font-size: 86px;
+  font-weight: 600;
+  letter-spacing: -4px;
+  line-height: 1.06;
+  border: 0;
+  padding: 0;
+  margin: 0 0 14px;
+}
+.portfolio-intro {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+.profile-reverse .portfolio-intro p {
+  margin: 0;
+  line-height: 1.55;
+  font-size: 15px;
+}
+.portfolio-intro > span {
+  font-size: 13px;
+  color: var(--fgColor-muted);
+}
+.markdown-body.profile-reverse a {
+  text-decoration: none;
+  color: inherit;
+}
+.markdown-body.profile-reverse a.project-feature {
+  width: 100%;
+  background: #182d4b;
+  color: #eaf3ff !important;
+  display: grid;
+  grid-template-columns: 1fr 1.55fr;
+  min-height: 222px;
+  border-radius: 10px;
+  overflow: hidden;
+  align-items: center;
+}
+.project-copy {
+  padding: 28px;
+}
+.profile-reverse h2 {
+  font-family: "IosevkaTermSlab Nerd Font", monospace;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  font-size: 31px;
+  line-height: 1.15;
+}
+.project-copy p {
+  font-size: 19px;
+  line-height: 1.4;
+  margin: 12px 0 14px;
+}
+.project-copy span {
+  font-size: 12px;
+  color: #b8d1ee;
+}
+.project-feature > svg {
+  width: 100%;
+  height: 215px;
+}
+.project-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.markdown-body.profile-reverse a.project-secondary {
+  width: 100%;
+  overflow: hidden;
+}
+.project-secondary > svg {
+  width: 100%;
+  height: 124px;
+  border-radius: 8px;
+  display: block;
+}
+.agent-project > svg {
+  background: #422f37;
+}
+.voice-project > svg {
+  background: #203e5b;
+}
+.project-secondary > div {
+  padding: 14px 1px 0;
+}
+.profile-reverse .project-secondary h2 {
+  font-size: 26px;
+}
+.profile-reverse .project-secondary p {
+  font-size: 13px;
+  margin: 6px 0 0;
+  color: var(--fgColor-muted);
+}
+.portfolio-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid var(--borderColor-default);
+  padding-top: 16px;
+  margin-top: auto;
+  font-size: 12px;
+}
+.portfolio-footer > span {
+  color: var(--fgColor-muted);
+}
+.profile-reverse .portfolio-footer p {
+  margin: 0;
+}
+.portfolio-footer > a {
+  margin-left: auto;
+  color: var(--fgColor-accent);
+}

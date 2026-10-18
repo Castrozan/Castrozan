@@ -29,19 +29,31 @@ class BrowserMediaTests(unittest.TestCase):
                     chrome.evaluate("getComputedStyle(document.body).backgroundColor"),
                     expected,
                 )
-                self.assertEqual((width, height), (846, 819))
+                self.assertEqual((width, height), (846, 790))
                 self.assertIn(
                     f"nix-{theme}.gif",
                     chrome.evaluate(
                         "document.querySelector('article.markdown-body img[src^=\"data:image/png;base64,\"]').closest('a').href"
                     ),
                 )
-                vector_background = chrome.evaluate(
-                    "[...document.querySelectorAll('article.markdown-body span')].find(el=>el.shadowRoot).shadowRoot.querySelector('rect').getAttribute('fill')"
+                snake_color = chrome.evaluate(
+                    "getComputedStyle([...document.querySelectorAll('article.markdown-body span')].find(el=>el.shadowRoot).shadowRoot.querySelector('.s')).fill"
                 )
                 self.assertEqual(
-                    vector_background, "#fff" if theme == "light" else "#0d1117"
+                    snake_color,
+                    "rgb(9, 105, 218)" if theme == "light" else "rgb(121, 192, 255)",
                 )
+                layout = chrome.evaluate(
+                    "(() => { const reverse=document.querySelector('.profile-reverse');"
+                    "return {width:reverse.querySelector('.project-feature').offsetWidth,"
+                    "footer:reverse.querySelector('.portfolio-footer').offsetTop+reverse.querySelector('.portfolio-footer').offsetHeight,"
+                    "languages:document.querySelectorAll('.language-row').length,"
+                    "badges:document.querySelectorAll('.profile-badges img').length}; })()"
+                )
+                self.assertGreater(layout["width"], 800)
+                self.assertLessEqual(layout["footer"], height)
+                self.assertEqual(layout["languages"], 6)
+                self.assertEqual(layout["badges"], 6)
                 crops = chrome.evaluate(
                     "(() => { const article = document.querySelector('article.markdown-body'); "
                     "const image = article.querySelector('img[src^=\"data:image/png;base64,\"]'); "
@@ -62,7 +74,7 @@ class BrowserMediaTests(unittest.TestCase):
                             for name, bounds in crops.items()
                         }
 
-                for start, end in [(9200, 9700), (19400, 19900)]:
+                for start, end in [(11300, 11800), (23300, 23800)]:
                     before = capture(start)
                     after = capture(end)
                     for name in crops:
@@ -70,6 +82,7 @@ class BrowserMediaTests(unittest.TestCase):
                             self.assertNotEqual(before[name], after[name])
                     self.assertEqual(before, capture(start))
                 self.assertEqual(capture(0)["nix"], capture(2400)["nix"])
+                self.assertEqual(capture(0), capture(24000))
 
     def test_github_theme_selects_image_when_system_theme_disagrees(self):
         root = Path(__file__).resolve().parent

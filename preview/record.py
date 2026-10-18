@@ -1,20 +1,28 @@
 import argparse
+import base64
 from contextlib import contextmanager
 import json
 from pathlib import Path
-
-from markdown_it import MarkdownIt
 
 from browser import isolated_browser
 from encode import encode_recording
 from media import read_media
 from render import render_frames
+from timing import TIMING
 
 
 @contextmanager
 def profile_preview(theme):
     root = Path(__file__).resolve().parent
-    reverse_html = MarkdownIt().render((root / "back.md").read_text())
+    reverse_html = (root / "scene" / "back.html").read_text()
+    front_script = (root / "scene" / "front.js").read_text()
+    stylesheet = "\n".join(
+        (root / "scene" / name).read_text() for name in ["front.css", "back.css"]
+    )
+    snake_svg = (root / "scene" / "assets" / f"gitlab-snk-{theme}.svg").read_text()
+    snake_source = (
+        "data:image/svg+xml;base64," + base64.b64encode(snake_svg.encode()).decode()
+    )
     card_script = (root / "scene" / "card.js").read_text()
     media_script = (root / "scene" / "media.js").read_text()
     theme_script = (root / "scene" / "theme.js").read_text()
@@ -28,20 +36,25 @@ def profile_preview(theme):
             )
             if background != expected_background:
                 raise RuntimeError(f"Unexpected {theme} background: {background}")
+            chrome.evaluate(
+                f"{front_script}\narrangeProfileFront("
+                f"{json.dumps(snake_source)}, {json.dumps(stylesheet)})"
+            )
             sources = chrome.evaluate(
                 "[...document.querySelectorAll('article.markdown-body img')]"
                 ".filter(image => image.getBoundingClientRect().width && "
-                "/\\.(gif|svg)$/.test(new URL(image.currentSrc).pathname))"
+                "/\\.gif$/.test(new URL(image.currentSrc).pathname))"
                 ".map(image => image.currentSrc)"
             )
             assets = read_media(sources)
+            assets.append({"source": snake_source, "svg": snake_svg})
             dimensions = chrome.evaluate(
-                f"{card_script}\nmountProfileReadmeCard({json.dumps(reverse_html)})"
+                f"{card_script}\nmountProfileReadmeCard("
+                f"{json.dumps(reverse_html)}, {json.dumps(TIMING)})"
             )
             width, height = dimensions["width"], dimensions["height"]
             chrome.evaluate(
-                f"{media_script}\nmountProfileReadmeMedia("
-                f"applyProfileMediaTheme({json.dumps(assets)}, {json.dumps(theme)}))"
+                f"{media_script}\nmountProfileReadmeMedia({json.dumps(assets)})"
             )
             yield chrome, width, height
         finally:

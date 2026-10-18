@@ -52,7 +52,7 @@ async function mountProfileReadmeMedia(assets) {
         host.style.setProperty(property, style.getPropertyValue(property));
       host.style.display = "inline-block";
       const shadow = host.attachShadow({ mode: "open" });
-      shadow.innerHTML = asset.svg;
+      shadow.innerHTML = asset.svg.replace(/:root\b/g, ":host");
       const vector = shadow.querySelector("svg");
       vector.style.width = "100%";
       vector.style.height = "100%";

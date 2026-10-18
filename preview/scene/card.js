@@ -1,4 +1,4 @@
-function mountProfileReadmeCard(reverseHtml) {
+function mountProfileReadmeCard(reverseHtml, timing) {
   const originalArticle = document.querySelector("article.markdown-body");
   if (!originalArticle) throw new Error("The profile README is missing");
 
@@ -40,6 +40,8 @@ function mountProfileReadmeCard(reverseHtml) {
   }
   reverse.style.transform = "rotateY(180deg)";
   reverseArticle.innerHTML = reverseHtml;
+  reverseArticle.classList.remove("profile-front");
+  reverseArticle.classList.add("profile-reverse");
   front.append(originalArticle);
   reverse.append(reverseArticle);
   card.append(front, reverse);
@@ -53,16 +55,24 @@ function mountProfileReadmeCard(reverseHtml) {
   }
 
   const keyframes = [];
-  for (let milliseconds = 0; milliseconds <= 20000; milliseconds += 20) {
+  const outgoingEnd = timing.outgoingStart + timing.turnDuration;
+  for (
+    let milliseconds = 0;
+    milliseconds <= timing.duration;
+    milliseconds += 20
+  ) {
     let rotation = 0;
     let scale = 1;
     let progress = null;
-    if (milliseconds >= 9200 && milliseconds <= 10800) {
-      progress = (milliseconds - 9200) / 1600;
-    } else if (milliseconds > 10800 && milliseconds < 18400) {
+    if (milliseconds >= timing.outgoingStart && milliseconds <= outgoingEnd) {
+      progress = (milliseconds - timing.outgoingStart) / timing.turnDuration;
+    } else if (
+      milliseconds > outgoingEnd &&
+      milliseconds < timing.returnStart
+    ) {
       rotation = 180;
-    } else if (milliseconds >= 18400) {
-      progress = (milliseconds - 18400) / 1600;
+    } else if (milliseconds >= timing.returnStart) {
+      progress = (milliseconds - timing.returnStart) / timing.turnDuration;
       rotation = 180;
     }
     if (progress !== null) {
@@ -72,13 +82,13 @@ function mountProfileReadmeCard(reverseHtml) {
       scale = 1 - 0.16 * Math.sin(Math.PI * easedProgress);
     }
     keyframes.push({
-      offset: milliseconds / 20000,
+      offset: milliseconds / timing.duration,
       transform: `rotateY(${rotation}deg) scale(${scale})`,
     });
   }
 
   const animation = card.animate(keyframes, {
-    duration: 20000,
+    duration: timing.duration,
     iterations: 1,
     fill: "both",
   });

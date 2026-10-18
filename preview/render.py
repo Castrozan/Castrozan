@@ -1,9 +1,13 @@
+from timing import TIMING
+
+
 def frame_timestamps():
+    outgoing_end = TIMING["outgoingStart"] + TIMING["turnDuration"]
     return [
-        *range(0, 9200, 50),
-        *range(9200, 10800, 20),
-        10800,
-        *range(18400, 20000, 20),
+        *range(0, TIMING["outgoingStart"], 50),
+        *range(TIMING["outgoingStart"], outgoing_end, 20),
+        outgoing_end,
+        *range(TIMING["returnStart"], TIMING["duration"], 20),
     ]
 
 

@@ -1,11 +1,17 @@
 import subprocess
 
+from timing import TIMING
+
 
 def encode_recording(frames, output):
     manifest = frames[0][0].parent / "frames.ffconcat"
     entries = ["ffconcat version 1.0"]
     for index, (path, timestamp) in enumerate(frames):
-        next_timestamp = frames[index + 1][1] if index + 1 < len(frames) else 20.0
+        next_timestamp = (
+            frames[index + 1][1]
+            if index + 1 < len(frames)
+            else TIMING["duration"] / 1000
+        )
         entries.extend(
             [
                 f"file '{path.name}'",
@@ -35,7 +41,7 @@ def encode_recording(frames, output):
             "[palette_input]palettegen=max_colors=64:stats_mode=diff,setpts=0[palette];"
             "[frames][palette]paletteuse=dither=none:diff_mode=rectangle",
             "-t",
-            "20",
+            str(TIMING["duration"] / 1000),
             "-loop",
             "0",
             str(output),
