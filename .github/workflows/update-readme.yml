@@ -62,15 +62,15 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-      - name: Prepare statistics input
-        run: printf '%s\n' '<!--START_SECTION:waka-->' '<!--END_SECTION:waka-->' > "$RUNNER_TEMP/languages.md"
-      - uses: Castrozan/git-waka@main
+      - name: Generate language statistics
+        uses: stats-organization/github-readme-stats-action@96a939a7398a290e0a9f84b2b31d21d0cf67d483
         with:
-          username: Castrozan
-          days: "30"
-          langs: "6"
-          ignore: "HTML,CSS,Dockerfile,Makefile"
-          readme: ${{ runner.temp }}/languages.md
+          card: top-langs
+          options: username=Castrozan&layout=compact&langs_count=6&hide=HTML,CSS,Dockerfile,Makefile
+          path: ${{ runner.temp }}/languages.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+          core_version: "2.2.1"
+          fail_on_error: "true"
 
       - name: Fetch PRs in external repos
         env:
@@ -108,7 +108,7 @@ jobs:
       - name: Verify refresh adapter
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
       - name: Refresh native Markdown and calendar assets
-        run: python3 .github/scripts/refresh_profile.py "$RUNNER_TEMP/languages.md" "$RUNNER_TEMP/contributions.json"
+        run: python3 .github/scripts/refresh_profile.py "$RUNNER_TEMP/languages.svg" "$RUNNER_TEMP/contributions.json"
       - name: Publish native source before recording
         run: |
           git config user.name "github-actions[bot]"

@@ -8,14 +8,18 @@ from xml.etree import ElementTree
 
 
 def language_chart(statistics):
-    chart = re.search(r"```text\n(.*?)\n```", statistics, re.DOTALL)
-    if chart is None:
-        raise ValueError("Language statistics contain no text chart")
-    if chart[1] == "No commit activity found in the given period.":
-        return chart[1]
+    try:
+        chart = ElementTree.fromstring(statistics)
+    except ElementTree.ParseError as error:
+        raise ValueError("Language statistics contain invalid SVG") from error
+    if chart.tag != "{http://www.w3.org/2000/svg}svg":
+        raise ValueError("Language statistics contain no SVG chart")
     rows = []
-    for line in chart[1].splitlines():
-        match = re.fullmatch(r"(.+?)\s+[▓░]+\s+(\d+(?:\.\d+)?)\s*%", line)
+    for label in chart.findall(
+        ".//{http://www.w3.org/2000/svg}text[@data-testid='lang-name']"
+    ):
+        line = " ".join("".join(label.itertext()).split())
+        match = re.fullmatch(r"(.+?)\s+(\d+(?:\.\d+)?)%", line)
         if match is None or not 0 <= float(match[2]) <= 100:
             raise ValueError(f"Invalid language statistic: {line}")
         name, percentage = match[1], float(match[2])
