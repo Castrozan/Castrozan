@@ -19,7 +19,7 @@ function mountProfileReadmeCard(reverseHtml) {
     width: `${rectangle.width}px`,
     height: `${rectangle.height}px`,
     zIndex: "2147483647",
-    perspective: "1800px",
+    perspective: `${rectangle.width * 4}px`,
     overflow: "hidden",
     backgroundColor,
     pointerEvents: "none",
@@ -53,20 +53,24 @@ function mountProfileReadmeCard(reverseHtml) {
   }
 
   const keyframes = [];
-  for (let milliseconds = 0; milliseconds <= 20000; milliseconds += 25) {
+  for (let milliseconds = 0; milliseconds <= 20000; milliseconds += 20) {
     let rotation = 0;
     let scale = 1;
     let progress = null;
-    if (milliseconds >= 9500 && milliseconds <= 10500) {
-      progress = (milliseconds - 9500) / 1000;
-      rotation = 180 * progress * progress * (3 - 2 * progress);
-    } else if (milliseconds > 10500 && milliseconds < 19000) {
+    if (milliseconds >= 9200 && milliseconds <= 10800) {
+      progress = (milliseconds - 9200) / 1600;
+    } else if (milliseconds > 10800 && milliseconds < 18400) {
       rotation = 180;
-    } else if (milliseconds >= 19000) {
-      progress = (milliseconds - 19000) / 1000;
-      rotation = 180 + 180 * progress * progress * (3 - 2 * progress);
+    } else if (milliseconds >= 18400) {
+      progress = (milliseconds - 18400) / 1600;
+      rotation = 180;
     }
-    if (progress !== null) scale = 1 - 0.16 * Math.sin(Math.PI * progress);
+    if (progress !== null) {
+      const easedProgress =
+        progress * progress * progress * (progress * (progress * 6 - 15) + 10);
+      rotation += 180 * easedProgress;
+      scale = 1 - 0.16 * Math.sin(Math.PI * easedProgress);
+    }
     keyframes.push({
       offset: milliseconds / 20000,
       transform: `rotateY(${rotation}deg) scale(${scale})`,
@@ -83,6 +87,22 @@ function mountProfileReadmeCard(reverseHtml) {
 
   window.profileReadmeCard = {
     animation,
+    async showRecordedFaces(frontSource, reverseSource) {
+      animation.pause();
+      const images = [frontSource, reverseSource].map((source) => {
+        const image = new Image();
+        image.src = source;
+        Object.assign(image.style, {
+          width: "100%",
+          height: "100%",
+          display: "block",
+        });
+        return image;
+      });
+      await Promise.all(images.map((image) => image.decode()));
+      front.replaceChildren(images[0]);
+      reverse.replaceChildren(images[1]);
+    },
     restore() {
       animation.cancel();
       originalParent.insertBefore(originalArticle, originalNextSibling);

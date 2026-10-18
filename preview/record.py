@@ -11,6 +11,7 @@ from websockets.sync.client import connect
 
 from chrome import ChromeConnection
 from encode import encode_recording
+from render import read_recording, render_turns
 
 
 def record_frames(chrome, destination, width, height):
@@ -64,6 +65,7 @@ def record_frames(chrome, destination, width, height):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--browser-endpoint-file", required=True, type=Path)
+    parser.add_argument("--recording", type=Path)
     arguments = parser.parse_args()
     root = Path(__file__).resolve().parent
     frames_directory = root.parent / ".preview-frames"
@@ -107,7 +109,12 @@ def main():
             chrome.evaluate("window.profileReadmeCard.animation.currentTime = 11000")
             chrome.screenshot(frames_directory / "back.png", width, height)
             chrome.evaluate("window.profileReadmeCard.animation.currentTime = 0")
-            frames = record_frames(chrome, frames_directory, width, height)
+            frames = (
+                read_recording(arguments.recording, frames_directory)
+                if arguments.recording
+                else record_frames(chrome, frames_directory, width, height)
+            )
+            frames = render_turns(chrome, frames, frames_directory, width, height)
         finally:
             chrome.evaluate("window.profileReadmeCard?.restore()")
     output = root / "readme-flip.gif"
