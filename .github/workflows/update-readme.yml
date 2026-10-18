@@ -29,6 +29,10 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+      - name: Configure Chromium sandbox
+        run: |
+          sandbox_directory=$(nix-build '<nixpkgs>' -A chromium.sandbox --no-out-link)
+          sudo install -D -o root -g root -m 4755 "$sandbox_directory/bin/__chromium-suid-sandbox" /run/wrappers/bin/__chromium-suid-sandbox
       - name: Verify refresh adapter
         run: python3 -m unittest discover -s .github/scripts -p 'test_*.py' -v
       - name: Verify recorded animation and native Markdown
@@ -62,6 +66,10 @@ jobs:
       - uses: cachix/install-nix-action@v31
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+      - name: Configure Chromium sandbox
+        run: |
+          sandbox_directory=$(nix-build '<nixpkgs>' -A chromium.sandbox --no-out-link)
+          sudo install -D -o root -g root -m 4755 "$sandbox_directory/bin/__chromium-suid-sandbox" /run/wrappers/bin/__chromium-suid-sandbox
       - name: Prepare statistics input
         run: printf '%s\n' '<!--START_SECTION:waka-->' '<!--END_SECTION:waka-->' > "$RUNNER_TEMP/languages.md"
       - uses: Castrozan/git-waka@main
