@@ -19,17 +19,5 @@ async function applyProfileTheme(theme) {
       image.decode(),
     ),
   );
-  const leadingParagraph = document.querySelector(
-    "article.markdown-body",
-  ).firstElementChild;
-  const leadingImages = [...leadingParagraph.querySelectorAll("img")];
-  if (
-    leadingParagraph.matches("p") &&
-    !leadingParagraph.textContent.trim() &&
-    leadingImages.length &&
-    leadingImages.every((image) => !image.getBoundingClientRect().width)
-  ) {
-    leadingParagraph.remove();
-  }
   return getComputedStyle(document.body).backgroundColor;
 }

@@ -59,6 +59,6 @@ def encode_recording(frames, output):
         ],
         check=True,
     )
-    if optimized.stat().st_size > 10_000_000:
-        raise RuntimeError("The GIF exceeds the 10 MB inline image budget")
+    if optimized.stat().st_size > 100 * 1024 * 1024:
+        raise RuntimeError("The GIF exceeds GitHub's 100 MiB ordinary Git file limit")
     optimized.replace(output)

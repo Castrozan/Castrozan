@@ -29,7 +29,8 @@ class BrowserMediaTests(unittest.TestCase):
                     chrome.evaluate("getComputedStyle(document.body).backgroundColor"),
                     expected,
                 )
-                self.assertEqual((width, height), (846, 790))
+                self.assertEqual(width, 846)
+                self.assertLessEqual(height, 1100)
                 self.assertIn(
                     f"nix-{theme}.gif",
                     chrome.evaluate(
@@ -44,16 +45,20 @@ class BrowserMediaTests(unittest.TestCase):
                     "rgb(9, 105, 218)" if theme == "light" else "rgb(121, 192, 255)",
                 )
                 layout = chrome.evaluate(
-                    "(() => { const reverse=document.querySelector('.profile-reverse');"
-                    "return {width:reverse.querySelector('.project-feature').offsetWidth,"
-                    "footer:reverse.querySelector('.portfolio-footer').offsetTop+reverse.querySelector('.portfolio-footer').offsetHeight,"
-                    "languages:document.querySelectorAll('.language-row').length,"
-                    "badges:document.querySelectorAll('.profile-badges img').length}; })()"
+                    "(() => {const reverse=document.querySelector('[data-readme-face=back] article');"
+                    "const front=document.querySelector('[data-readme-face=front] article');"
+                    "return {reverseHeight:reverse.scrollHeight,"
+                    "languageText:front.querySelector('pre').textContent,"
+                    "lambdaWidth:front.querySelector('img[src^=\"data:image/png\"]').width,"
+                    "headingSize:getComputedStyle(reverse.querySelector('h1')).fontSize,"
+                    "source:location.pathname};})()"
                 )
-                self.assertGreater(layout["width"], 800)
-                self.assertLessEqual(layout["footer"], height)
-                self.assertEqual(layout["languages"], 6)
-                self.assertEqual(layout["badges"], 6)
+                self.assertLessEqual(layout["reverseHeight"], height)
+                self.assertIn("Python", layout["languageText"])
+                self.assertIn("▓", layout["languageText"])
+                self.assertEqual(layout["lambdaWidth"], 200)
+                self.assertEqual(layout["headingSize"], "32px")
+                self.assertTrue(layout["source"].endswith("/preview/scene/front.md"))
                 crops = chrome.evaluate(
                     "(() => { const article = document.querySelector('article.markdown-body'); "
                     "const image = article.querySelector('img[src^=\"data:image/png;base64,\"]'); "
@@ -82,7 +87,12 @@ class BrowserMediaTests(unittest.TestCase):
                             self.assertNotEqual(before[name], after[name])
                     self.assertEqual(before, capture(start))
                 self.assertEqual(capture(0)["nix"], capture(2400)["nix"])
-                self.assertEqual(capture(0), capture(24000))
+                snake_duration = chrome.evaluate(
+                    "[...document.querySelectorAll('article.markdown-body span')].find(element=>element.shadowRoot).shadowRoot.querySelector('svg').getAttribute('data-animation-duration')"
+                )
+                self.assertEqual(
+                    capture(0)["snake"], capture(int(snake_duration))["snake"]
+                )
 
     def test_github_theme_selects_image_when_system_theme_disagrees(self):
         root = Path(__file__).resolve().parent

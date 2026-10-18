@@ -1,8 +1,9 @@
 import argparse
-import base64
 from contextlib import contextmanager
 import json
 from pathlib import Path
+import subprocess
+import time
 
 from browser import isolated_browser
 from encode import encode_recording
@@ -11,46 +12,92 @@ from render import render_frames
 from timing import TIMING
 
 
+def load_markdown(chrome, theme_script, theme, source_revision, face):
+    url = (
+        f"https://github.com/Castrozan/Castrozan/blob/{source_revision}"
+        f"/preview/scene/{face}.md"
+    )
+    chrome.request("Page.navigate", {"url": url})
+    deadline = time.monotonic() + 40
+    required_element = "pre" if face == "front" else "h1"
+    while not chrome.evaluate(
+        f"location.pathname.endsWith('/{face}.md') && document.readyState !== 'loading'"
+        f" && !!document.querySelector('article.markdown-body {required_element}')"
+    ):
+        if time.monotonic() > deadline:
+            state = chrome.evaluate(
+                "({url:location.href,title:document.title,ready:document.readyState,"
+                "text:document.body.innerText.slice(0,300)})"
+            )
+            raise RuntimeError(f"Published Markdown did not load: {state}")
+        time.sleep(0.1)
+    background = chrome.evaluate(
+        f"{theme_script}\napplyProfileTheme({json.dumps(theme)})"
+    )
+    expected = "rgb(255, 255, 255)" if theme == "light" else "rgb(13, 17, 23)"
+    if background != expected:
+        raise RuntimeError(f"Unexpected {theme} background: {background}")
+    deadline = time.monotonic() + 5
+    previous_bounds = None
+    stable_measurements = 0
+    while stable_measurements < 3:
+        bounds = chrome.evaluate(
+            "(() => {const bounds=document.querySelector('article.markdown-body').getBoundingClientRect();"
+            "return {width:bounds.width,height:bounds.height};})()"
+        )
+        stable_measurements = (
+            stable_measurements + 1
+            if bounds == previous_bounds and bounds["width"] == 846
+            else 0
+        )
+        previous_bounds = bounds
+        if time.monotonic() > deadline:
+            raise RuntimeError(f"GitHub Markdown layout did not settle: {bounds}")
+        time.sleep(0.1)
+    return chrome.evaluate(
+        "(() => { const article=document.querySelector('article.markdown-body');"
+        "const bounds=article.getBoundingClientRect();return {html:article.innerHTML,"
+        "width:bounds.width,height:bounds.height}; })()"
+    )
+
+
 @contextmanager
 def profile_preview(theme):
     root = Path(__file__).resolve().parent
-    reverse_html = (root / "scene" / "back.html").read_text()
-    front_script = (root / "scene" / "front.js").read_text()
-    stylesheet = "\n".join(
-        (root / "scene" / name).read_text() for name in ["front.css", "back.css"]
+    source_paths = [
+        "preview/scene/front.md",
+        "preview/scene/back.md",
+        "preview/scene/assets",
+    ]
+    subprocess.run(
+        ["git", "diff", "--quiet", "HEAD", "--", *source_paths],
+        cwd=root.parent,
+        check=True,
     )
-    snake_svg = (root / "scene" / "assets" / f"gitlab-snk-{theme}.svg").read_text()
-    snake_source = (
-        "data:image/svg+xml;base64," + base64.b64encode(snake_svg.encode()).decode()
-    )
+    source_revision = subprocess.check_output(
+        ["git", "log", "-1", "--format=%H", "--", *source_paths],
+        cwd=root.parent,
+        text=True,
+    ).strip()
     card_script = (root / "scene" / "card.js").read_text()
     media_script = (root / "scene" / "media.js").read_text()
     theme_script = (root / "scene" / "theme.js").read_text()
     with isolated_browser(theme) as chrome:
         try:
-            background = chrome.evaluate(
-                f"{theme_script}\napplyProfileTheme({json.dumps(theme)})"
+            reverse_face = load_markdown(
+                chrome, theme_script, theme, source_revision, "back"
             )
-            expected_background = (
-                "rgb(255, 255, 255)" if theme == "light" else "rgb(13, 17, 23)"
-            )
-            if background != expected_background:
-                raise RuntimeError(f"Unexpected {theme} background: {background}")
-            chrome.evaluate(
-                f"{front_script}\narrangeProfileFront("
-                f"{json.dumps(snake_source)}, {json.dumps(stylesheet)})"
-            )
+            load_markdown(chrome, theme_script, theme, source_revision, "front")
             sources = chrome.evaluate(
                 "[...document.querySelectorAll('article.markdown-body img')]"
                 ".filter(image => image.getBoundingClientRect().width && "
-                "/\\.gif$/.test(new URL(image.currentSrc).pathname))"
+                "/\\.(gif|svg)$/.test(new URL(image.currentSrc).pathname))"
                 ".map(image => image.currentSrc)"
             )
             assets = read_media(sources)
-            assets.append({"source": snake_source, "svg": snake_svg})
             dimensions = chrome.evaluate(
                 f"{card_script}\nmountProfileReadmeCard("
-                f"{json.dumps(reverse_html)}, {json.dumps(TIMING)})"
+                f"{json.dumps(reverse_face)}, {json.dumps(TIMING)})"
             )
             width, height = dimensions["width"], dimensions["height"]
             chrome.evaluate(

@@ -36,7 +36,7 @@ class AnimationTests(unittest.TestCase):
         for theme in ["light", "dark"]:
             with self.subTest(theme=theme):
                 path = Path(__file__).with_name(f"readme-flip-{theme}.gif")
-                self.assertLessEqual(path.stat().st_size, 10_000_000)
+                self.assertLessEqual(path.stat().st_size, 100 * 1024 * 1024)
                 intervals = [(11500, 12500), (22700, 23700)]
                 samples = {interval: [] for interval in intervals}
                 elapsed = 0

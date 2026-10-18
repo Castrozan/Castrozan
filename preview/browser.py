@@ -59,7 +59,7 @@ def isolated_browser(theme):
                         chrome.request(
                             "Emulation.setDeviceMetricsOverride",
                             {
-                                "width": 1868,
+                                "width": 1280,
                                 "height": 973,
                                 "deviceScaleFactor": 1,
                                 "mobile": False,
