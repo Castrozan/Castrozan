@@ -1,0 +1,91 @@
+{
+  "browser_conditions": "Isolated Chromium, browser cache disabled, no network throttling; CDN cache not controlled.",
+  "initial_playback": [
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/65634ee2fc97d520d756ff49bd3725feb50c255b/stress/3-cycles.gif",
+      "complete": true,
+      "width": 846,
+      "height": 790,
+      "name": "3-cycles",
+      "load_seconds": 2.518,
+      "motion": true
+    },
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/65634ee2fc97d520d756ff49bd3725feb50c255b/stress/7-cycles.gif",
+      "complete": true,
+      "width": 846,
+      "height": 790,
+      "name": "7-cycles",
+      "load_seconds": 4.085,
+      "motion": true
+    },
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/65634ee2fc97d520d756ff49bd3725feb50c255b/stress/15-cycles.gif",
+      "complete": true,
+      "width": 846,
+      "height": 790,
+      "name": "15-cycles",
+      "load_seconds": 6.803,
+      "motion": true
+    },
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/65634ee2fc97d520d756ff49bd3725feb50c255b/stress/long-hold.gif",
+      "complete": true,
+      "width": 846,
+      "height": 790,
+      "name": "long-hold",
+      "load_seconds": 3.397,
+      "motion": true
+    }
+  ],
+  "six_minute_playback": [
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/65634ee2fc97d520d756ff49bd3725feb50c255b/stress/15-cycles.gif",
+      "complete": true,
+      "width": 846,
+      "height": 790,
+      "name": "15-cycles",
+      "load_seconds": 2.767,
+      "motion": true,
+      "full_playback_samples": [
+        {
+          "elapsed": 45.058,
+          "bytes": 98043
+        },
+        {
+          "elapsed": 90.073,
+          "bytes": 98043
+        },
+        {
+          "elapsed": 135.079,
+          "bytes": 98043
+        },
+        {
+          "elapsed": 180.091,
+          "bytes": 76357
+        },
+        {
+          "elapsed": 225.14,
+          "bytes": 132992
+        },
+        {
+          "elapsed": 270.095,
+          "bytes": 132507
+        },
+        {
+          "elapsed": 315.09,
+          "bytes": 133426
+        },
+        {
+          "elapsed": 360.289,
+          "bytes": 133439
+        },
+        {
+          "elapsed": 360.985,
+          "bytes": 133522
+        }
+      ],
+      "motion_after_six_minutes": true
+    }
+  ]
+}
