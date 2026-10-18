@@ -1,0 +1,34 @@
+[
+  {
+    "source": "https://github.com/Castrozan/Castrozan/raw/53a4f1bfc2dccbe05fc3290d7ec709fe40dacac4/stress/native-max/native-max.gif",
+    "complete": true,
+    "width": 846,
+    "height": 996,
+    "clip": {
+      "x": 370,
+      "y": 825.59375,
+      "width": 846,
+      "height": 996,
+      "scale": 1
+    },
+    "name": "native-max",
+    "load_seconds": 2.644,
+    "motion_changed_pixels": 167074
+  },
+  {
+    "source": "https://github.com/Castrozan/Castrozan/raw/53a4f1bfc2dccbe05fc3290d7ec709fe40dacac4/stress/native-hour/native-hour.gif",
+    "complete": true,
+    "width": 846,
+    "height": 996,
+    "clip": {
+      "x": 370,
+      "y": 825.59375,
+      "width": 846,
+      "height": 996,
+      "scale": 1
+    },
+    "name": "native-hour",
+    "load_seconds": 1.458,
+    "motion_changed_pixels": 376173
+  }
+]
