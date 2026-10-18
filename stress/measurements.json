@@ -1,0 +1,30 @@
+[
+  {
+    "name": "3-cycles",
+    "bytes": 20386044,
+    "frames": 1152,
+    "seconds": 72.0,
+    "turns": 6
+  },
+  {
+    "name": "7-cycles",
+    "bytes": 47567136,
+    "frames": 2688,
+    "seconds": 168.0,
+    "turns": 14
+  },
+  {
+    "name": "15-cycles",
+    "bytes": 101929320,
+    "frames": 5760,
+    "seconds": 360.0,
+    "turns": 30
+  },
+  {
+    "name": "long-hold",
+    "bytes": 6794462,
+    "frames": 384,
+    "seconds": 669.73,
+    "turns": 2
+  }
+]
