@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+import os
 from pathlib import Path
 import subprocess
 from tempfile import TemporaryDirectory
@@ -15,18 +16,21 @@ def isolated_browser(theme):
     with TemporaryDirectory(prefix="readme-browser-") as directory:
         profile = Path(directory)
         with (profile / "browser.log").open("w+") as log:
+            browser_arguments = [
+                "chromium",
+                "--headless=new",
+                "--disable-extensions",
+                "--no-first-run",
+                "--no-default-browser-check",
+                "--disable-background-networking",
+                "--remote-debugging-port=0",
+                f"--user-data-dir={profile}",
+                "about:blank",
+            ]
+            if os.environ.get("GITHUB_ACTIONS") == "true":
+                browser_arguments.insert(1, "--no-sandbox")
             process = subprocess.Popen(
-                [
-                    "chromium",
-                    "--headless=new",
-                    "--disable-extensions",
-                    "--no-first-run",
-                    "--no-default-browser-check",
-                    "--disable-background-networking",
-                    "--remote-debugging-port=0",
-                    f"--user-data-dir={profile}",
-                    "about:blank",
-                ],
+                browser_arguments,
                 stdout=subprocess.DEVNULL,
                 stderr=log,
             )
