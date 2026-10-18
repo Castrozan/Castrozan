@@ -1,0 +1,40 @@
+<svg width="440" height="215" xmlns="http://www.w3.org/2000/svg" color="#eaf3ff"
+    viewBox="0 0 440 215"
+    aria-label="A Nix flake connecting a desktop, laptop and terminal"
+    role="img"
+  ><rect width="440" height="215" fill="#182d4b" rx="6"/>
+    <g fill="none" stroke="#7ebae4" stroke-width="2">
+      <path d="M204 99 92 64M204 99 326 57M204 99 321 153" />
+      <path d="m92 64 0 44m234-51v28m-5 68v-28" stroke-dasharray="4 6" />
+    </g>
+    <g fill="#182d4b" stroke="#7ebae4" stroke-width="2">
+      <path d="m24 22 119 0 0 72-119 0z" />
+      <path d="m71 94 0 12m-25 0h50" />
+      <path d="m292 17 107 0 0 63-107 0z" />
+      <path d="m280 84 131 0 12 10-155 0z" />
+      <rect x="274" y="130" width="137" height="65" rx="6" />
+    </g>
+    <g
+      fill="#7ebae4"
+      font-family="JetBrainsMono Nerd Font,monospace"
+      font-size="12"
+    >
+      <text x="38" y="49">nixos</text>
+      <text x="38" y="70">{ config, ... }</text>
+      <text x="307" y="44">darwin</text>
+      <text x="307" y="63">home-manager</text>
+      <text x="290" y="155">$ rebuild</text>
+      <path d="m290 168 6 4-6 4m16-3h30" fill="none" stroke="currentColor" />
+    </g>
+    <g
+      transform="translate(200 106)"
+      stroke="#c9e7ff"
+      stroke-width="8"
+      stroke-linecap="square"
+    >
+      <path d="m-32-19 64 38m-64 0 64-38M0-38v76" />
+      <path
+        d="m-32-19 18-1m-18 39 9-16m23 35-9-16m41-3-18 1m18-39-9 16m-23-35 9 16"
+      />
+    </g>
+  </svg>
