@@ -15,9 +15,9 @@ from render import render_frames
 def profile_preview(theme):
     root = Path(__file__).resolve().parent
     reverse_html = MarkdownIt().render((root / "back.md").read_text())
-    card_script = (root / "card.js").read_text()
-    media_script = (root / "media.js").read_text()
-    theme_script = (root / "theme.js").read_text()
+    card_script = (root / "scene" / "card.js").read_text()
+    media_script = (root / "scene" / "media.js").read_text()
+    theme_script = (root / "scene" / "theme.js").read_text()
     with isolated_browser(theme) as chrome:
         try:
             background = chrome.evaluate(
