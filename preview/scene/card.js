@@ -91,7 +91,7 @@ async function mountProfileReadmeCard(reverseFace, timing) {
     }
     keyframes.push({
       offset: milliseconds / timing.duration,
-      transform: `rotateY(${rotation}deg) scale(${scale})`,
+      transform: `rotateY(${-rotation}deg) scale(${scale})`,
     });
   }
 
