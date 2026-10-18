@@ -1,5 +1,5 @@
 <table><tr>
-<td><a href="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-dark.gif#gh-dark-mode-only"><img width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-dark.gif#gh-dark-mode-only" alt="Animated lambda"></a><a href="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-light.gif#gh-light-mode-only"><img width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-light.gif#gh-light-mode-only" alt="Animated lambda"></a></td>
+<td width="200"><a href="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-dark.gif#gh-dark-mode-only"><img width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-dark.gif#gh-dark-mode-only" alt="Animated lambda"></a><a href="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-light.gif#gh-light-mode-only"><img width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-light.gif#gh-light-mode-only" alt="Animated lambda"></a></td>
 <td><strong>Languages</strong><pre>Python     ▓▓▓▓▓▓▓▓▓▓░░░░░░░ 57.84 %
 Nix        ▓▓░░░░░░░░░░░░░░░ 13.89 %
 QML        ▓▓░░░░░░░░░░░░░░░ 11.19 %
