@@ -88,9 +88,9 @@ def write_site_architecture(destination):
     connections = [
         ("M210 35H324", "#FFD600"),
         ("M522 35H636", "#FFD600"),
-        ("M112 58V83H423V112", "#FF6B35"),
-        ("M210 135H324", "#FFD600"),
-        ("M522 135H579V35H636", "#FFD600"),
+        ("M112 58V82H610V123H636", "#FF6B35"),
+        ("M210 135H268V94H579V135H636", "#FFD600"),
+        ("M210 135H324", "#FF6B35"),
         ("M522 135H636", "#FF6B35"),
         ("M735 112V58", "#FF6B35"),
     ]
@@ -99,8 +99,8 @@ def write_site_architecture(destination):
         (324, 12, "Artifact Registry", "container images", "#FFD600"),
         (636, 12, "Cloud Run apps", "health-gated rollouts", "#FFD600"),
         (12, 112, "lucaszanoni.com", "browser requests", "#FFD600"),
-        (324, 112, "Cloudflare Worker", "edge routing", "#FFD600"),
-        (636, 112, "Cloudflare Access", "private routes", "#FF6B35"),
+        (324, 112, "Cloudflare Access", "private routes", "#FF6B35"),
+        (636, 112, "Cloudflare Worker", "edge routing", "#FFD600"),
     ]
     elements = [
         '<svg xmlns="http://www.w3.org/2000/svg" width="846" height="174" viewBox="0 0 846 174" role="img" aria-label="GitHub Actions builds images for Artifact Registry and deploys Cloud Run apps. Terraform configures the edge. Browser requests pass through a Cloudflare Worker, with Access protecting private routes." data-animation-duration="4000">',
@@ -117,7 +117,7 @@ def write_site_architecture(destination):
         "</g>",
         '<g fill="#888888" font-family="monospace" font-size="11">',
         '<text x="249" y="77">Terraform</text>',
-        '<text x="584" y="94">public</text>',
+        '<text x="452" y="106">public</text>',
         "</g>",
     ]
     for left, top, title, subtitle, accent in nodes:
