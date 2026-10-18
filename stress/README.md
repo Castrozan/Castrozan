@@ -16,7 +16,9 @@ The earlier compact fixture and the new native fixture have different byte costs
 
 ## Verified behavior
 
-The earlier 101,929,320-byte fixture loads and animates inside GitHub's rendered README, continues through its six-minute timeline and animates after the loop restarts. The other compact fixtures also load and animate. These checks establish that 10 MB is not a general repository-hosted README image limit. Native fixture verification is recorded alongside these measurements.
+The earlier 101,929,320-byte fixture loads and animates inside GitHub's rendered README, continues through its six-minute timeline and animates after the loop restarts. The other compact fixtures also load and animate. These checks establish that 10 MB is not a general repository-hosted README image limit. The native 99,729,486-byte fixture also loads and animates through its full 216-second timeline, with motion confirmed after the loop restarts. The one-hour fixture loads and animates at the beginning of its timeline. Browser measurements are in [verification.json](verification.json).
+
+Adding a tenth complete native cycle produces 110,810,515 bytes, 240 seconds and 20 turns. That locally built file exceeds the documented limit and was not uploaded. These turn counts repeat the same two faces; different content changes the byte cost.
 
 The one-hour fixture passes an independent Gifsicle duration sum of 3,600 seconds. Pillow also verifies that all six extended hold frames match the original static reverse face. A full hour of real-time browser playback has not been observed.
 

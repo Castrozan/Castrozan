@@ -87,5 +87,83 @@
       ],
       "motion_after_six_minutes": true
     }
-  ]
+  ],
+  "native_initial_playback": [
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/53a4f1bfc2dccbe05fc3290d7ec709fe40dacac4/stress/native-max/native-max.gif",
+      "complete": true,
+      "width": 846,
+      "height": 996,
+      "clip": {
+        "x": 370,
+        "y": 825.59375,
+        "width": 846,
+        "height": 996,
+        "scale": 1
+      },
+      "name": "native-max",
+      "load_seconds": 2.644,
+      "motion_changed_pixels": 167074
+    },
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/53a4f1bfc2dccbe05fc3290d7ec709fe40dacac4/stress/native-hour/native-hour.gif",
+      "complete": true,
+      "width": 846,
+      "height": 996,
+      "clip": {
+        "x": 370,
+        "y": 825.59375,
+        "width": 846,
+        "height": 996,
+        "scale": 1
+      },
+      "name": "native-hour",
+      "load_seconds": 1.458,
+      "motion_changed_pixels": 376173
+    }
+  ],
+  "native_full_playback": [
+    {
+      "source": "https://github.com/Castrozan/Castrozan/raw/53a4f1bfc2dccbe05fc3290d7ec709fe40dacac4/stress/native-max/native-max.gif",
+      "complete": true,
+      "width": 846,
+      "height": 996,
+      "name": "native-max",
+      "load_seconds": 1.919,
+      "motion": true,
+      "full_playback_samples": [
+        {
+          "elapsed": 45.052,
+          "bytes": 89449
+        },
+        {
+          "elapsed": 90.051,
+          "bytes": 89449
+        },
+        {
+          "elapsed": 135.06,
+          "bytes": 89449
+        },
+        {
+          "elapsed": 180.098,
+          "bytes": 72532
+        },
+        {
+          "elapsed": 216.309,
+          "bytes": 197843
+        },
+        {
+          "elapsed": 217.003,
+          "bytes": 198594
+        }
+      ],
+      "motion_after_complete_native_timeline": true
+    }
+  ],
+  "native_next_complete_cycle": {
+    "bytes": 110810515,
+    "seconds": 240,
+    "turns": 20,
+    "fits_ordinary_git": false
+  }
 }
