@@ -1,25 +1,36 @@
+import base64
 import hashlib
+import io
 from pathlib import Path
-from tempfile import TemporaryDirectory
 import unittest
 
 from PIL import Image
 
-from render import read_recording
+from media import decode_gif
 
 
 class AnimationTests(unittest.TestCase):
-    def test_recording_frames_use_opaque_rgb(self):
-        with TemporaryDirectory() as directory:
-            root = Path(directory)
-            source = root / "source.gif"
-            image = Image.new("P", (2, 2), 1)
-            image.putpalette([0, 255, 0, 13, 17, 23] + [0] * 762)
-            image.save(source, transparency=0, duration=50, optimize=False)
-            frames = read_recording(source, root)
-            with Image.open(frames[0][0]) as frame:
-                self.assertEqual(frame.mode, "RGB")
-                self.assertNotIn("transparency", frame.info)
+    def test_embedded_gif_preserves_frames_and_durations(self):
+        images = [Image.new("RGB", (2, 2), color) for color in ["red", "green", "blue"]]
+        source = io.BytesIO()
+        images[0].save(
+            source,
+            format="GIF",
+            save_all=True,
+            append_images=images[1:],
+            duration=[40, 70, 110],
+            loop=0,
+        )
+        animation = decode_gif(source.getvalue())
+        self.assertEqual(animation["duration"], 220)
+        self.assertEqual(
+            [frame["end"] for frame in animation["frames"]], [40, 110, 220]
+        )
+        for expected, frame in zip(images, animation["frames"]):
+            with Image.open(
+                io.BytesIO(base64.b64decode(frame["source"].split(",")[1]))
+            ) as actual:
+                self.assertEqual(actual.convert("RGB").tobytes(), expected.tobytes())
 
     def test_both_turns_animate_at_fifty_frames_per_second(self):
         path = Path(__file__).with_name("readme-flip.gif")

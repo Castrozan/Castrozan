@@ -87,22 +87,6 @@ function mountProfileReadmeCard(reverseHtml) {
 
   window.profileReadmeCard = {
     animation,
-    async showRecordedFaces(frontSource, reverseSource) {
-      animation.pause();
-      const images = [frontSource, reverseSource].map((source) => {
-        const image = new Image();
-        image.src = source;
-        Object.assign(image.style, {
-          width: "100%",
-          height: "100%",
-          display: "block",
-        });
-        return image;
-      });
-      await Promise.all(images.map((image) => image.decode()));
-      front.replaceChildren(images[0]);
-      reverse.replaceChildren(images[1]);
-    },
     restore() {
       animation.cancel();
       originalParent.insertBefore(originalArticle, originalNextSibling);
