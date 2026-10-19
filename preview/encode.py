@@ -38,8 +38,9 @@ def encode_recording(frames, output):
             *input_command,
             "-filter_complex",
             "fps=50,split[frames][palette_input];"
-            "[palette_input]palettegen=max_colors=256:stats_mode=single[palette];"
-            "[frames][palette]paletteuse=new=1:dither=none",
+            "[palette_input]palettegen=max_colors=256:reserve_transparent=1:"
+            "stats_mode=single[palette];"
+            "[frames][palette]paletteuse=new=1:dither=none:alpha_threshold=128",
             "-t",
             str(TIMING["duration"] / 1000),
             "-loop",

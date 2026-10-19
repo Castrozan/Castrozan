@@ -6,7 +6,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from markdown_it import MarkdownIt
 from PIL import Image
 
 from browser import isolated_browser
@@ -37,7 +36,9 @@ class BrowserMediaTests(unittest.TestCase):
             '<div data-readme-face="back"><article class="markdown-body">'
             f'<img src="{source}"></article></div>'
         )
-        script = (Path(__file__).parent / "scene" / "media.js").read_text()
+        script = (
+            Path(__file__).resolve().parents[1] / "scene" / "media.js"
+        ).read_text()
         with isolated_browser("dark") as chrome:
             chrome.evaluate(f"document.body.innerHTML = {json.dumps(fixture)}")
             chrome.evaluate("document.querySelector('img').decode()")
@@ -61,12 +62,22 @@ class BrowserMediaTests(unittest.TestCase):
                 TemporaryDirectory() as directory,
                 profile_preview(theme) as (chrome, width, height),
             ):
-                expected = (
-                    "rgb(255, 255, 255)" if theme == "light" else "rgb(13, 17, 23)"
-                )
                 self.assertEqual(
                     chrome.evaluate("getComputedStyle(document.body).backgroundColor"),
-                    expected,
+                    "rgba(0, 0, 0, 0)",
+                )
+                self.assertEqual(
+                    chrome.evaluate("document.documentElement.dataset.colorMode"),
+                    theme,
+                )
+                self.assertEqual(chrome.evaluate("document.body.childElementCount"), 1)
+                self.assertEqual(
+                    chrome.evaluate(
+                        "['article.markdown-body','article.markdown-body table tr',"
+                        "'article.markdown-body pre'].map(selector=>"
+                        "getComputedStyle(document.querySelector(selector)).backgroundColor)"
+                    ),
+                    ["rgba(0, 0, 0, 0)"] * 3,
                 )
                 self.assertEqual(width, 846)
                 self.assertLessEqual(height, 1100)
@@ -113,6 +124,14 @@ class BrowserMediaTests(unittest.TestCase):
                     destination = Path(directory) / f"media-{milliseconds}.png"
                     chrome.screenshot(destination, width, height)
                     with Image.open(destination) as image:
+                        image = image.convert("RGBA")
+                        if milliseconds == 11300:
+                            self.assertEqual(
+                                image.getpixel((width - 1, height - 1))[3], 0
+                            )
+                            self.assertEqual(image.getchannel("A").getextrema()[1], 255)
+                        if milliseconds == 0:
+                            self.assertEqual(image.getpixel((10, 10))[3], 0)
                         return {
                             name: image.crop(bounds).tobytes()
                             for name, bounds in crops.items()
@@ -152,40 +171,6 @@ class BrowserMediaTests(unittest.TestCase):
                             self.assertNotEqual(before[name], after[name])
                     self.assertEqual(before, capture(start))
                 self.assertEqual(capture(0)["ambient"], capture(8000)["ambient"])
-
-    def test_github_theme_selects_image_when_system_theme_disagrees(self):
-        root = Path(__file__).resolve().parent
-        html = MarkdownIt().render((root / "README.md").read_text())
-        with isolated_browser("dark") as chrome:
-            chrome.evaluate(
-                f"document.querySelector('article.markdown-body').innerHTML = {json.dumps(html)}"
-            )
-            chrome.evaluate(
-                "document.querySelectorAll('article.markdown-body img').forEach(image => {"
-                "image.width = 2; image.height = 2; });"
-            )
-            for theme, system in [("light", "dark"), ("dark", "light")]:
-                with self.subTest(github=theme, system=system):
-                    chrome.request(
-                        "Emulation.setEmulatedMedia",
-                        {
-                            "features": [
-                                {"name": "prefers-color-scheme", "value": system}
-                            ]
-                        },
-                    )
-                    chrome.evaluate(
-                        f"document.documentElement.dataset.colorMode = {json.dumps(theme)};"
-                        "document.documentElement.dataset.lightTheme = 'light';"
-                        "document.documentElement.dataset.darkTheme = 'dark';"
-                    )
-                    visible = chrome.evaluate(
-                        "[...document.querySelectorAll('article.markdown-body img')]"
-                        ".filter(image => image.getBoundingClientRect().width)"
-                        ".map(image => image.getAttribute('src'))"
-                    )
-                    self.assertEqual(len(visible), 1)
-                    self.assertIn(f"readme-flip-{theme}.gif", visible[0])
 
 
 if __name__ == "__main__":

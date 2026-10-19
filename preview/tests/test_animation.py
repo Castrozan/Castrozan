@@ -5,7 +5,7 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
 from encode import encode_recording
 from media import decode_gif
@@ -41,10 +41,33 @@ class AnimationTests(unittest.TestCase):
                         expected,
                     )
 
+    def test_transparent_canvas_survives_gif_encoding_and_optimization(self):
+        colors = ["red", "blue", "green"]
+        with TemporaryDirectory() as directory:
+            destination = Path(directory)
+            frames = []
+            for index, color in enumerate(colors):
+                frame = Image.new("RGBA", (128, 64), (0, 0, 0, 0))
+                ImageDraw.Draw(frame).rectangle((16, 16, 48, 48), fill=color)
+                path = destination / f"frame-{index}.png"
+                frame.save(path)
+                frames.append((path, index * 8))
+            output = destination / "recording.gif"
+            encode_recording(frames, output)
+            with Image.open(output) as animation:
+                for index, color in enumerate(colors):
+                    animation.seek(index)
+                    frame = animation.convert("RGBA")
+                    self.assertEqual(frame.getpixel((0, 0))[3], 0)
+                    self.assertEqual(
+                        frame.getpixel((32, 32)),
+                        Image.new("RGB", (1, 1), color).getpixel((0, 0)) + (255,),
+                    )
+
     def test_reverse_face_motion_continues_during_the_reading_hold(self):
         for theme in ["light", "dark"]:
             with self.subTest(theme=theme):
-                path = Path(__file__).with_name(f"readme-flip-{theme}.gif")
+                path = Path(__file__).resolve().parents[1] / f"readme-flip-{theme}.gif"
                 elapsed = 0
                 samples = []
                 with Image.open(path) as animation:
@@ -64,6 +87,33 @@ class AnimationTests(unittest.TestCase):
                 self.assertGreaterEqual(len(samples), 150)
                 self.assertTrue(all(duration <= 60 for duration, _ in samples))
                 self.assertGreaterEqual(len({digest for _, digest in samples}), 100)
+
+    def test_recorded_animations_keep_the_canvas_corners_transparent(self):
+        for theme in ["light", "dark"]:
+            with self.subTest(theme=theme):
+                path = Path(__file__).resolve().parents[1] / f"readme-flip-{theme}.gif"
+                with Image.open(path) as animation:
+                    frame_numbers = [0, animation.n_frames // 2, animation.n_frames - 1]
+                    for frame_number in frame_numbers:
+                        animation.seek(frame_number)
+                        frame = animation.convert("RGBA")
+                        self.assertEqual(
+                            frame.getpixel((frame.width - 1, frame.height - 1))[3],
+                            0,
+                        )
+                        self.assertEqual(frame.getchannel("A").getextrema()[1], 255)
+                        for background_color in [
+                            (255, 0, 255, 255),
+                            (0, 255, 255, 255),
+                        ]:
+                            background = Image.new("RGBA", frame.size, background_color)
+                            background.alpha_composite(frame)
+                            self.assertEqual(
+                                background.getpixel(
+                                    (frame.width - 1, frame.height - 1)
+                                ),
+                                background_color,
+                            )
 
     def test_embedded_gif_preserves_frames_and_durations(self):
         images = [Image.new("RGB", (2, 2), color) for color in ["red", "green", "blue"]]
@@ -90,7 +140,7 @@ class AnimationTests(unittest.TestCase):
     def test_both_turns_animate_at_fifty_frames_per_second(self):
         for theme in ["light", "dark"]:
             with self.subTest(theme=theme):
-                path = Path(__file__).with_name(f"readme-flip-{theme}.gif")
+                path = Path(__file__).resolve().parents[1] / f"readme-flip-{theme}.gif"
                 self.assertLessEqual(path.stat().st_size, 100 * 1024 * 1024)
                 intervals = [(11500, 12500), (22700, 23700)]
                 samples = {interval: [] for interval in intervals}

@@ -103,6 +103,15 @@ def profile_preview(theme):
             chrome.evaluate(
                 f"{media_script}\nmountProfileReadmeMedia({json.dumps(assets)})"
             )
+            chrome.evaluate(
+                "document.documentElement.style.setProperty('background-color',"
+                "'transparent','important');document.body.style.setProperty("
+                "'background-color','transparent','important')"
+            )
+            chrome.request(
+                "Emulation.setDefaultBackgroundColorOverride",
+                {"color": {"r": 0, "g": 0, "b": 0, "a": 0}},
+            )
             yield chrome, width, height
         finally:
             chrome.evaluate("window.profileReadmeMedia?.restore()")

@@ -2,6 +2,7 @@ async function mountProfileReadmeCard(reverseFace, timing) {
   const originalArticle = document.querySelector("article.markdown-body");
   if (!originalArticle) throw new Error("The profile README is missing");
 
+  const bodyContents = Array.from(document.body.childNodes);
   const originalParent = originalArticle.parentElement;
   const originalNextSibling = originalArticle.nextSibling;
   const rectangle = originalArticle.getBoundingClientRect();
@@ -10,7 +11,6 @@ async function mountProfileReadmeCard(reverseFace, timing) {
       `The Markdown faces have different native widths: ${rectangle.width} and ${reverseFace.width}`,
     );
   const height = Math.ceil(Math.max(rectangle.height, reverseFace.height));
-  const backgroundColor = getComputedStyle(document.body).backgroundColor;
   const stage = document.createElement("div");
   const card = document.createElement("div");
   const front = document.createElement("div");
@@ -26,9 +26,15 @@ async function mountProfileReadmeCard(reverseFace, timing) {
     zIndex: "2147483647",
     perspective: `${rectangle.width * 4}px`,
     overflow: "hidden",
-    backgroundColor,
     pointerEvents: "none",
   });
+  for (const backgroundVariable of [
+    "--bgColor-default",
+    "--bgColor-muted",
+    "--bgColor-neutral-muted",
+  ]) {
+    stage.style.setProperty(backgroundVariable, "transparent");
+  }
   Object.assign(card.style, {
     position: "relative",
     width: "100%",
@@ -40,7 +46,6 @@ async function mountProfileReadmeCard(reverseFace, timing) {
       position: "absolute",
       inset: "0",
       backfaceVisibility: "hidden",
-      backgroundColor,
     });
   }
   reverse.style.transform = "rotateY(180deg)";
@@ -61,6 +66,8 @@ async function mountProfileReadmeCard(reverseFace, timing) {
     stage.remove();
     throw new Error("The reverse content exceeds the captured README height");
   }
+
+  document.body.replaceChildren(stage);
 
   const keyframes = [];
   const outgoingEnd = timing.outgoingStart + timing.turnDuration;
@@ -107,8 +114,8 @@ async function mountProfileReadmeCard(reverseFace, timing) {
     animation,
     restore() {
       animation.cancel();
+      document.body.replaceChildren(...bodyContents);
       originalParent.insertBefore(originalArticle, originalNextSibling);
-      stage.remove();
       delete window.profileReadmeCard;
     },
   };
@@ -116,7 +123,6 @@ async function mountProfileReadmeCard(reverseFace, timing) {
   return {
     width: Math.round(rectangle.width),
     height,
-    backgroundColor,
     reverseHeight: reverseArticle.scrollHeight,
   };
 }

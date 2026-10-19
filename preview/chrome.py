@@ -42,6 +42,7 @@ class ChromeConnection:
             "Page.captureScreenshot",
             {
                 "format": "png",
+                "omitBackground": True,
                 "captureBeyondViewport": True,
                 "clip": {"x": 0, "y": 0, "width": width, "height": height, "scale": 1},
             },
