@@ -139,10 +139,10 @@ jobs:
                   message = text[start:start + 2000].replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
                   print(f"::error title=Profile verification failed::{message}")
           PYTHON
-      - name: Publish refreshed GIFs
+      - name: Publish refreshed animations
         run: |
-          if ! git diff --quiet -- preview/readme-flip-light.gif preview/readme-flip-dark.gif; then
-            git add preview/readme-flip-light.gif preview/readme-flip-dark.gif
+          if ! git diff --quiet -- preview/readme-flip-light.avif preview/readme-flip-dark.avif; then
+            git add preview/readme-flip-light.avif preview/readme-flip-dark.avif
             git commit -m "docs: refresh animated profile recording"
             git push origin HEAD:master
           fi

@@ -37,29 +37,27 @@ def encode_recording(frames, output):
         [
             *input_command,
             "-filter_complex",
-            "fps=50,split[frames][palette_input];"
-            "[palette_input]palettegen=max_colors=256:reserve_transparent=1:"
-            "stats_mode=single[palette];"
-            "[frames][palette]paletteuse=new=1:dither=none:alpha_threshold=128",
+            "fps=50,format=yuva444p,split[color][alpha];"
+            "[color]format=yuv420p[color];[alpha]alphaextract[alpha]",
+            "-map",
+            "[color]",
+            "-map",
+            "[alpha]",
+            "-c:v",
+            "libaom-av1",
+            "-crf",
+            "38",
+            "-cpu-used",
+            "6",
+            "-row-mt",
+            "1",
             "-t",
             str(TIMING["duration"] / 1000),
             "-loop",
             "0",
+            "-f",
+            "avif",
             str(output),
         ],
         check=True,
     )
-    optimized = manifest.with_name("optimized.gif")
-    subprocess.run(
-        [
-            "gifsicle",
-            "--optimize=3",
-            str(output),
-            "--output",
-            str(optimized),
-        ],
-        check=True,
-    )
-    if optimized.stat().st_size > 100 * 1024 * 1024:
-        raise RuntimeError("The GIF exceeds GitHub's 100 MiB ordinary Git file limit")
-    optimized.replace(output)

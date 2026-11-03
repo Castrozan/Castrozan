@@ -127,7 +127,7 @@ def main():
     frames_directory.mkdir(parents=True, exist_ok=True)
     with profile_preview(arguments.theme) as (chrome, width, height):
         frames = render_frames(chrome, frames_directory, width, height)
-    output = root / f"readme-flip-{arguments.theme}.gif"
+    output = root / f"readme-flip-{arguments.theme}.avif"
     encode_recording(frames, output)
     print(
         json.dumps(

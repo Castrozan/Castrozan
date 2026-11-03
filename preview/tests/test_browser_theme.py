@@ -44,7 +44,7 @@ class BrowserThemeTests(unittest.TestCase):
                         ".map(image => image.getAttribute('src'))"
                     )
                     self.assertEqual(len(visible), 1)
-                    self.assertIn(f"readme-flip-{theme}.gif", visible[0])
+                    self.assertIn(f"readme-flip-{theme}.avif", visible[0])
 
 
 if __name__ == "__main__":
