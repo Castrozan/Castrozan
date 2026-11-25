@@ -1,10 +1,10 @@
 <table><tr>
 <td width="200"><a href="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-dark.gif#gh-dark-mode-only"><img width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-dark.gif#gh-dark-mode-only" alt="Animated lambda"></a><a href="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-light.gif#gh-light-mode-only"><img width="200" src="https://raw.githubusercontent.com/Castrozan/Castrozan/master/assets/nix-light.gif#gh-light-mode-only" alt="Animated lambda"></a></td>
-<td><strong>Languages</strong><pre>Python     ▓▓▓▓▓▓▓▓▓▓░░░░░░░ 56.23 %
-TypeScript ▓▓░░░░░░░░░░░░░░░ 12.80 %
-Rust       ▓▓░░░░░░░░░░░░░░░ 10.20 %
-Nix        ▓▓░░░░░░░░░░░░░░░ 10.09 %
-JavaScript ▓░░░░░░░░░░░░░░░░  6.33 %
+<td><strong>Languages</strong><pre>Python     ▓▓▓▓▓▓▓▓▓▓░░░░░░░ 56.18 %
+TypeScript ▓▓░░░░░░░░░░░░░░░ 12.79 %
+Rust       ▓▓░░░░░░░░░░░░░░░ 10.27 %
+Nix        ▓▓░░░░░░░░░░░░░░░ 10.08 %
+JavaScript ▓░░░░░░░░░░░░░░░░  6.34 %
 QML        ▓░░░░░░░░░░░░░░░░  4.35 %</pre></td>
 <td><strong>What I build</strong><p><a href="https://github.com/Castrozan/.dotfiles">Declarative systems</a><br>NixOS and macOS, built from one configuration.</p><p><a href="https://github.com/Castrozan/clawde">Tools for agents</a><br>Persistent workspaces and local voice input.</p></td>
 </tr></table>
